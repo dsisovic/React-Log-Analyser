@@ -1,0 +1,35 @@
+$active-color: #3363ff;
+$option-color: #e6ecff;
+
+.logo {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  img {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+.options {
+  &__item {
+    gap: 1em;
+    width: 240px;
+    cursor: pointer;
+    margin: 0.4em 0;
+    border-radius: 1em;
+    padding: 0.5em 0.5em 0.5em 1em;
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9em;
+    line-height: 116%;
+
+    &--active,
+    &:hover {
+      color: $active-color;
+      background: $option-color;
+    }
+  }
+}

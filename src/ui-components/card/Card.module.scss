@@ -1,0 +1,12 @@
+@import "../../styles/partials/variables";
+
+$background: #ffffff;
+
+.card {
+  padding: 1em;
+  display: flex;
+  margin: 0 0.5em;
+  border-radius: 1em;
+  background: $background;
+  box-shadow: $box-shadow;
+}

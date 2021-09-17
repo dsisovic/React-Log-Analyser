@@ -1,0 +1,47 @@
+.card {
+    display: flex;
+    align-items: center;
+
+    &__content {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        &--value {
+            font-weight: 800;
+            font-size: 34px;
+            line-height: 117%;
+            color: #1D1929;
+            margin: 2px 0;
+        }
+
+        &--label {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 130%;
+            letter-spacing: 0.03em;
+            color: #A5A3A9;
+        }
+    }
+
+    &__icon {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+
+        &--globe {
+            background: #E9FDF8;
+        }
+
+        &--user {
+            background: #E6ECFF;
+        }
+
+        &--comment {
+            background: #FBF1FE;
+        }
+    }
+}
