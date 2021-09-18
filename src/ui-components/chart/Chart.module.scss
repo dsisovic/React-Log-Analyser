@@ -1,0 +1,12 @@
+.container {
+    position: relative;
+    display: flex;
+
+    &__center {
+        position: absolute;
+        top: 42%;
+        left: 30%;
+        transform: translateX(-20%);
+        text-align: center;
+    }
+}

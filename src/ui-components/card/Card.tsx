@@ -1,5 +1,5 @@
 import styles from './Card.module.scss';
-import { ICardProps } from './card-props.model';
+import { ICardProps } from './ts/card-props.model';
 
 const Card = (props: ICardProps) => {
     return (

@@ -1,47 +1,164 @@
 .card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+
+  &__content {
     display: flex;
     align-items: center;
+    gap: 1em;
 
-    &__content {
+    &--subheader {
+      display: flex;
+      font-weight: 600;
+      line-height: 130%;
+      font-size: 0.75rem;
+      align-items: center;
+      letter-spacing: 0.03em;
+
+      &-decrease {
+        color: #f42829;
+      }
+
+      &-increase {
+        color: #18ba92;
+      }
+    }
+
+    &--value {
+      font-weight: 800;
+      font-size: 2.1rem;
+      line-height: 117%;
+      color: #1d1929;
+      margin: 0.12em 0;
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
+    }
+
+    &--label {
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 130%;
+      letter-spacing: 0.03em;
+      color: #a5a3a9;
+    }
+
+    &--chart {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .list__item {
         display: flex;
         align-items: center;
-        gap: 1em;
+        margin-bottom: 0.1em;
+        justify-content: space-between;
+
+        &--value,
+        &--label {
+          font-weight: bold;
+          font-size: 1rem;
+          line-height: 116%;
+          color: #1d1929;
+        }
 
         &--value {
-            font-weight: 800;
-            font-size: 34px;
-            line-height: 117%;
-            color: #1D1929;
-            margin: 2px 0;
+          font-size: 1.2rem;
         }
 
         &--label {
-            font-weight: 600;
-            font-size: 12px;
-            line-height: 130%;
-            letter-spacing: 0.03em;
-            color: #A5A3A9;
+          display: flex;
+          align-items: center;
+          gap: 3em;
         }
+
+        &--icon {
+          width: 40px;
+          height: 40px;
+        }
+
+        &--icon-facebook {
+          background: #e6ecff;
+        }
+
+        &--icon-google {
+          background: #e9fdf8;
+        }
+      }
+
+      &-value {
+        display: block;
+        font-weight: bold;
+        font-size: 1.5rem;
+        line-height: 135%;
+        text-align: center;
+        letter-spacing: 0.01em;
+        color: #1d1929;
+      }
+
+      &-label {
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 130%;
+        text-align: center;
+        letter-spacing: 0.03em;
+        color: #a5a3a9;
+      }
+
+      &-subheader {
+        position: static;
+        font-style: normal;
+        font-weight: 800;
+        font-size: 1.5rem;
+        line-height: 132%;
+        letter-spacing: 0.01em;
+        font-feature-settings: "liga" off;
+        color: #1d1929;
+        margin-top: 0.5em;
+
+        &-label {
+          color: #615e69;
+          margin-top: 0.2em;
+        }
+
+        &-container {
+          gap: 2em;
+          display: flex;
+          align-items: center;
+          margin-bottom: 1em;
+        }
+      }
+
+      h3 {
+        font-weight: bold;
+        font-size: 1.2rem;
+        line-height: 135%;
+        letter-spacing: 0.01em;
+        color: #1d1929;
+        margin: 0.5em 0.5em 0 0;
+      }
+    }
+  }
+
+  &__icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+
+    &--globe {
+      background: #e9fdf8;
     }
 
-    &__icon {
-        width: 70px;
-        height: 70px;
-        display: flex;
-        border-radius: 50%;
-        align-items: center;
-        justify-content: center;
-
-        &--globe {
-            background: #E9FDF8;
-        }
-
-        &--user {
-            background: #E6ECFF;
-        }
-
-        &--comment {
-            background: #FBF1FE;
-        }
+    &--user {
+      background: #e6ecff;
     }
+
+    &--comment {
+      background: #fbf1fe;
+    }
+  }
 }
