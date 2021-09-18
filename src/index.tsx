@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'fontsource-nunito-sans/latin.css';
 import reportWebVitals from './reportWebVitals';
-import 'typeface-roboto';
 
 ReactDOM.render(
   <React.StrictMode>
