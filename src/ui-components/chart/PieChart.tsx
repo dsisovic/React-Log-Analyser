@@ -1,17 +1,17 @@
-import { Line } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import styles from "./Chart.module.scss";
 import { IChartProps } from "./ts/chart-props.model";
-import { ILineOptions } from './ts/line-options.model';
+import { IDoughnutOptions } from "./ts/doughnut-options.model";
 
-const LineChart = (props: IChartProps) => (
+const PieChart = (props: IChartProps) => (
   <>
     <div
       className={`${styles.container}`}
       style={{ width: props.width, height: props.height }}
     >
-      <Line
+      <Pie
         data={props.data}
-        options={props.options as ILineOptions}
+        options={props.options as IDoughnutOptions}
         width={props.width}
         height={props.height}
       />
@@ -19,4 +19,4 @@ const LineChart = (props: IChartProps) => (
   </>
 );
 
-export default LineChart;
+export default PieChart;
