@@ -1,10 +1,10 @@
 import styles from "./Statistics.module.scss";
 import List from "../../ui-components/list/List";
-import Card from "../../ui-components/card/Card";
 import PublicIcon from "@mui/icons-material/Public";
 import GoogleIcon from '@mui/icons-material/Google';
 import MessageIcon from "@mui/icons-material/Message";
 import FacebookIcon from '@mui/icons-material/Facebook';
+import CardContainer from "../../ui-components/card/Card";
 import LineChart from "../../ui-components/chart/LineChart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DoughnutChart from "../../ui-components/chart/DoughnutChart";
@@ -152,7 +152,7 @@ const Statistics = () => {
   return (
     <>
       <div className={styles.card}>
-        <Card style={{ width: cardWidth, height: cardHeight }}>
+        <CardContainer style={{ width: cardWidth, height: cardHeight }}>
           <div className={styles["card__content"]}>
             <span
               className={`${styles["card__icon"]} ${styles["card__icon--globe"]}`}
@@ -166,8 +166,8 @@ const Statistics = () => {
               </span>
             </div>
           </div>
-        </Card>
-        <Card style={{ width: cardWidth, height: cardHeight }}>
+        </CardContainer>
+        <CardContainer style={{ width: cardWidth, height: cardHeight }}>
           <div className={styles["card__content"]}>
             <span
               className={`${styles["card__icon"]} ${styles["card__icon--user"]}`}
@@ -189,8 +189,8 @@ const Statistics = () => {
               </span>
             </div>
           </div>
-        </Card>
-        <Card style={{ width: cardWidth, height: cardHeight }}>
+        </CardContainer>
+        <CardContainer style={{ width: cardWidth, height: cardHeight }}>
           <div className={styles["card__content"]}>
             <span
               className={`${styles["card__icon"]} ${styles["card__icon--comment"]}`}
@@ -212,11 +212,11 @@ const Statistics = () => {
               </span>
             </div>
           </div>
-        </Card>
+        </CardContainer>
       </div>
 
       <div className={styles.card}>
-        <Card
+        <CardContainer
           style={{ width: '400px', height: '336px' }}
         >
           <div className={`${styles["card__content--chart"]}`}>
@@ -228,9 +228,9 @@ const Statistics = () => {
               <span className={styles['card__content--chart-label']}>Total</span>
             </DoughnutChart>
           </div>
-        </Card>
+        </CardContainer>
 
-        <Card
+        <CardContainer
           style={{ width: '700px', height: '336px' }}
         >
           <div className={`${styles["card__content--chart"]}`}>
@@ -244,11 +244,11 @@ const Statistics = () => {
 
             <LineChart data={lineData} options={lineOptions} width={650} height={190}></LineChart>
           </div>
-        </Card>
+        </CardContainer>
       </div>
 
       <div className={styles.card}>
-        <Card
+        <CardContainer
           style={{ width: '500px', height: '250px' }}
         >
           <div className={`${styles["card__content--chart"]}`}>
@@ -273,9 +273,9 @@ const Statistics = () => {
               }
             </List>
           </div>
-        </Card>
+        </CardContainer>
 
-        <Card
+        <CardContainer
           style={{ width: '500px', height: '250px' }}
         >
           <div className={`${styles["card__content--chart"]}`}>
@@ -299,7 +299,7 @@ const Statistics = () => {
               }
             </List>
           </div>
-        </Card>
+        </CardContainer>
       </div>
     </>
   );

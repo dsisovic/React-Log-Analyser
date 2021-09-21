@@ -1,7 +1,8 @@
 .card {
+  gap: 1em;
   display: flex;
-  align-items: center;
   margin-bottom: 1em;
+  align-items: center;
 
   &__content {
     display: flex;

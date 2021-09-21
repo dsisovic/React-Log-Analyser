@@ -1,14 +1,15 @@
-import styles from './Card.module.scss';
+import Card from '@mui/material/Card';
 import { ICardProps } from './ts/card-props.model';
+import CardContent from '@mui/material/CardContent';
 
-const Card = (props: ICardProps) => {
+const CardContainer = (props: ICardProps) => {
     return (
-        <>
-            <div className={styles.card} style={{...props.style}}>
+        <Card style={{ ...props.style }}>
+            <CardContent>
                 {props.children}
-            </div>
-        </>
+            </CardContent>
+        </Card>
     )
 }
 
-export default Card;
+export default CardContainer;

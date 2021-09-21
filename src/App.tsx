@@ -1,5 +1,7 @@
 import "./App.scss";
+import Users from "./components/users/Users";
 import Sidebar from "./components/sidebar/Sidebar";
+import { Route, Redirect, Switch } from "react-router";
 import Statistics from "./components/statistics/Statistics";
 
 const App = () => {
@@ -10,7 +12,23 @@ const App = () => {
           <Sidebar></Sidebar>
         </div>
         <div className="container__content">
-          <Statistics></Statistics>
+          <Switch>
+            <Route path="/" exact>
+              <Redirect to="/overview"></Redirect>
+            </Route>
+
+            <Route path="/overview" exact>
+              <Statistics></Statistics>
+            </Route>
+
+            <Route path="/users" exact>
+              <Users></Users>
+            </Route>
+
+            <Route path="*">
+              <p>not found</p>
+            </Route>
+          </Switch>
         </div>
       </div>
     </>
