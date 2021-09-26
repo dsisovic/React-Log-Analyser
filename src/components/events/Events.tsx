@@ -8,6 +8,7 @@ import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignme
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import SecurityIcon from '@mui/icons-material/Security';
+import TrafficIcon from '@mui/icons-material/Traffic';
 
 const cardWidth = "280px";
 const cardHeight = "104px";
@@ -213,7 +214,7 @@ const Events = () => {
             <span
               className={`${statisticsStyles["card__icon"]} ${statisticsStyles["card__icon--user"]}`}
             >
-              <SecurityIcon sx={{ fontSize: 35, color: "#003CFF" }} />
+              <TrafficIcon sx={{ fontSize: 35, color: "#003CFF" }} />
             </span>
             <div>
               <h3 className={statisticsStyles["card__content--value"]}>
@@ -226,7 +227,7 @@ const Events = () => {
                 </span>
               </h3>
               <span className={statisticsStyles["card__content--label"]}>
-                Data exchange
+                Data exchanged this week
               </span>
             </div>
           </div>
