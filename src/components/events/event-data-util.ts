@@ -35,10 +35,7 @@ const getNumberOfEventsByDate = (labels: string[], data: IEventItem[], eventType
 
 const getBytesOfEventsByDate = (labels: string[], data: IEventBandwidthItem[]) => {
   return labels.reduce((accumulator, label) => {
-    const totalBytes = data
-      .filter(dataItem => dataItem.datetime.startsWith(label))
-      .map(dataItem => +dataItem.bandwidth)
-      .reduce((labelAccumulator, dataItem) => labelAccumulator + dataItem, 0)
+    const totalBytes = data.reduce((bdwAcc, item) => item.datetime.startsWith(label) ? bdwAcc + +item.bandwidth : bdwAcc, 0);
 
     return accumulator + totalBytes;
   }, 0);
@@ -56,7 +53,7 @@ export const getAttackTableRows = (data: IEventAttackItem[]) => {
         { 'row-1': numberOfAttacks, alignment: TableAlignment.RIGHT }
       ]
     }
-  }); 
+  });
 }
 
 export const getTotalEventsPercentage = (data: IEventItem[], eventType?: EventType) => {
@@ -97,10 +94,7 @@ export const getTotalDataTraffic = (data: IEventBandwidthItem[]) => {
   const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -7);
 
   const totalBytes = labels.reduce((accumulator, label) => {
-    const sumOfLabelData = data
-      .filter(dataItem => dataItem.datetime.startsWith(label))
-      .map(dataItem => +dataItem.bandwidth)
-      .reduce((labelAccumulator, dataItem) => labelAccumulator + dataItem, 0)
+    const sumOfLabelData = data.reduce((bdwAcc, item) => item.datetime.startsWith(label) ? bdwAcc + +item.bandwidth : bdwAcc, 0);
 
     return accumulator + sumOfLabelData;
   }, 0);
