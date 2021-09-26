@@ -1,5 +1,6 @@
 import "./App.scss";
 import Users from "./components/users/Users";
+import Events from "./components/events/Events";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Route, Redirect, Switch } from "react-router";
 import Statistics from "./components/statistics/Statistics";
@@ -26,7 +27,7 @@ const App = () => {
             </Route>
 
             <Route path="*">
-              <p>not found</p>
+            <Events></Events>
             </Route>
           </Switch>
         </div>
