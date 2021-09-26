@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import styles from './Events.module.scss';
+import { Skeleton, Stack } from '@mui/material';
+import { loadEvents } from '../../store/EventIndex';
 import TrafficIcon from '@mui/icons-material/Traffic';
 import { useDispatch, useSelector } from 'react-redux';
 import { EventType } from './ts/enums/event-type.enum';
@@ -13,47 +14,14 @@ import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import DoughnutChart from "../../ui-components/chart/DoughnutChart";
 import statisticsStyles from "../statistics/Statistics.module.scss";
 import { IEventStore } from '../../store/ts/models/event-store.model';
-import { loadEvents, loadAttackEvents } from '../../store/EventIndex';
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { dougnutOptions, lineOptions } from '../../ui-components/chart/util/chart-util';
+import { dougnutOptions, getLineOptions } from '../../ui-components/chart/util/chart-util';
 import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as eventDataUtility from './event-data-util';
-import * as eventsUtil from './events-util';
-import { Skeleton, Stack } from '@mui/material';
 
 const cardWidth = "280px";
 const cardHeight = "104px";
-
-const barData = {
-  labels: ['443', '80', '445', 'Others'],
-  datasets: [
-    {
-      label: '443',
-      data: [54, 0, 0, 0],
-      fill: false,
-      backgroundColor: eventsUtil.YELLOW_COLOR
-    },
-    {
-      label: '80',
-      data: [0, 80, 0, 0],
-      fill: false,
-      backgroundColor: eventsUtil.BLUE_COLOR
-    },
-    {
-      label: '445',
-      data: [0, 0, 445, 0],
-      fill: false,
-      backgroundColor: eventsUtil.RED_COLOR
-    },
-    {
-      label: 'Others',
-      data: [0, 0, 0, 1993],
-      fill: false,
-      backgroundColor: eventsUtil.PURPLE_COLOR
-    }
-  ],
-};
 
 const attackHeaders = [
   { value: 'Attacker', alignment: TableAlignment.LEFT },
@@ -62,7 +30,7 @@ const attackHeaders = [
 
 const Events = () => {
   const dispatch = useDispatch();
-  const { isLoading, data, attackData } = useSelector((state: IEventStore) => state.events);
+  const { isLoading, data, attackData, bandwidthData } = useSelector((state: IEventStore) => state.events);
 
   const {
     showUpIcon: showEventsUpIcon, totalPercentage: totalEventsPercentage
@@ -71,9 +39,10 @@ const Events = () => {
     showUpIcon: showAttacksUpIcon, totalPercentage: totalAttacksPercentage
   } = eventDataUtility.getTotalEventsPercentage(data, EventType.MALWARE_ATTACK);
 
+  const { showBandwidthUpIcon, totalBandwidthPercentage } =  eventDataUtility.getTotalBandwidthPercentage(bandwidthData);
+
   useEffect(() => {
     dispatch(loadEvents());
-    dispatch(loadAttackEvents());
   }, [dispatch]);
 
   return (
@@ -149,13 +118,14 @@ const Events = () => {
             </span>
             <div>
               <h3 className={statisticsStyles["card__content--value"]}>
-                52
-                <span className={styles.unit}>MB</span>
+                {eventDataUtility.getTotalDataTraffic(bandwidthData)}
                 <span
-                  className={`${statisticsStyles["card__content--subheader"]} ${statisticsStyles["card__content--subheader-decrease"]}`}
+                  className={`${statisticsStyles["card__content--subheader"]} 
+                  ${statisticsStyles[`card__content--subheader-${showBandwidthUpIcon ? 'increase' : 'decrease'}`]}`}
                 >
-                  <KeyboardArrowDownIcon />
-                  23.74%
+                  {!showBandwidthUpIcon && <KeyboardArrowDownIcon />}
+                  {showBandwidthUpIcon && <KeyboardArrowUpIcon />}
+                  {totalBandwidthPercentage}%
                 </span>
               </h3>
               <span className={statisticsStyles["card__content--label"]}>
@@ -173,7 +143,7 @@ const Events = () => {
           <div className={`${statisticsStyles["card__content--chart"]}`}>
             <h3>All Events - last 7 days</h3>
 
-            <LineChart data={eventDataUtility.getLineData(data)} options={lineOptions} width={650} height={230}></LineChart>
+            <LineChart data={eventDataUtility.getLineData(data)} options={getLineOptions()} width={650} height={230}></LineChart>
           </div>
         </CardContainer>
 
@@ -205,9 +175,9 @@ const Events = () => {
           style={{ width: '600px', height: '260px' }}
         >
           <div className={`${statisticsStyles["card__content--chart"]}`}>
-            <h3>Traffic by destination port</h3>
+            <h3>Total traffic by ports</h3>
 
-            <BarChart data={barData} options={lineOptions} width={560} height={190}></BarChart>
+            <BarChart data={eventDataUtility.getTrafficChartData(bandwidthData)} options={getLineOptions('B')} width={560} height={190}></BarChart>
           </div>
         </CardContainer>
       </div>

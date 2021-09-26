@@ -7,7 +7,8 @@ import * as eventDataUtil from "../components/events/event-data-util";
 const initialState = {
     isLoading: true,
     data: [],
-    attackData: []
+    attackData: [],
+    bandwidthData: []
 };
 
 export const eventStoreReducer = createSlice({
@@ -15,11 +16,12 @@ export const eventStoreReducer = createSlice({
     initialState,
     reducers: {
         finishLoading(state, action) {
+            const [data, attackData, bandwidthData] = action.payload;
+            
             state.isLoading = false;
-            state.data = action.payload;
-        },
-        finishLoadingAttacks(state, action) {
-            state.attackData = action.payload;
+            state.data = data;
+            state.attackData = attackData;
+            state.bandwidthData = bandwidthData;
         }
     }
 });
@@ -29,18 +31,16 @@ const eventStore = createStore(eventStoreReducer.reducer);
 export const loadEvents = () => {
     return async (dispatch: Dispatch<any>) => {
         setTimeout(async () => {
-            const data = await useFetch({ fetchUrl: 'assets/events/event-log.txt' });
+            const data = await Promise.all([
+                useFetch({ fetchUrl: 'assets/events/event-log.txt' }),
+                useFetch({ fetchUrl: 'assets/events/event-attack-log.txt' }),
+                useFetch({ fetchUrl: 'assets/events/event-traffic-log.txt' })
+            ]);
 
-            dispatch(eventReducerActions.finishLoading(eventDataUtil.transformEventList(data)));
+            const payload = data.map(dataItem => eventDataUtil.transformEventList(dataItem));
+
+            dispatch(eventReducerActions.finishLoading(payload));
         }, APP_LOAD_DELAY);
-    };
-}
-
-export const loadAttackEvents = () => {
-    return async (dispatch: Dispatch<any>) => {
-        const data = await useFetch({ fetchUrl: 'assets/events/event-attack-log.txt' });
-
-        dispatch(eventReducerActions.finishLoadingAttacks(eventDataUtil.transformEventList(data)));
     };
 }
 

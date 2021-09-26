@@ -1,8 +1,14 @@
 import { EventType } from "./ts/enums/event-type.enum";
 import { IEventItem } from "./ts/models/event-item.model";
 import { IEventAttackItem } from "./ts/models/event-attack-item.model";
+import { IEventBandwidthItem } from "./ts/models/event-bandwidth-item.model";
 import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as eventsUtil from './events-util';
+import * as mainUtil from '../../utils/main-util';
+
+const trafficChartDataColors = [
+  eventsUtil.YELLOW_COLOR, eventsUtil.BLUE_COLOR, eventsUtil.RED_COLOR, eventsUtil.PURPLE_COLOR
+];
 
 const getPiePercentage = (data: IEventItem[], typeValue: EventType) => {
   return +((data.filter(dataItem => dataItem.value === typeValue).length / data.length) * 100).toFixed(1);
@@ -27,17 +33,30 @@ const getNumberOfEventsByDate = (labels: string[], data: IEventItem[], eventType
   }, 0);
 }
 
+const getBytesOfEventsByDate = (labels: string[], data: IEventBandwidthItem[]) => {
+  return labels.reduce((accumulator, label) => {
+    const totalBytes = data
+      .filter(dataItem => dataItem.datetime.startsWith(label))
+      .map(dataItem => +dataItem.bandwidth)
+      .reduce((labelAccumulator, dataItem) => labelAccumulator + dataItem, 0)
+
+    return accumulator + totalBytes;
+  }, 0);
+}
+
 export const getAttackTableRows = (data: IEventAttackItem[]) => {
   const uniqueAttackers = getUniqueItemsFromTheRange<IEventAttackItem>(data, 'value', 0);
 
   return uniqueAttackers.map(attackerIpAddress => {
     const numberOfAttacks = data.filter(dataItem => dataItem.value === attackerIpAddress).length;
 
-    return { data: [
-      { 'row-0': attackerIpAddress, alignment: TableAlignment.LEFT }, 
-      { 'row-1': numberOfAttacks, alignment: TableAlignment.RIGHT }
-    ] }
-  });
+    return {
+      data: [
+        { 'row-0': attackerIpAddress, alignment: TableAlignment.LEFT },
+        { 'row-1': numberOfAttacks, alignment: TableAlignment.RIGHT }
+      ]
+    }
+  }); 
 }
 
 export const getTotalEventsPercentage = (data: IEventItem[], eventType?: EventType) => {
@@ -54,20 +73,51 @@ export const getTotalEventsPercentage = (data: IEventItem[], eventType?: EventTy
   return { showUpIcon, totalPercentage };
 }
 
+export const getTotalBandwidthPercentage = (data: IEventBandwidthItem[]) => {
+  const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -14);
+  const last7DayLabels = labels.slice(-7);
+  const previous7DayLabels = labels.slice(0, 7);
+
+  const last7DaysEvents = getBytesOfEventsByDate(last7DayLabels, data);
+  const previous7DaysEvents = getBytesOfEventsByDate(previous7DayLabels, data);
+
+  const showBandwidthUpIcon = last7DaysEvents > previous7DaysEvents;
+  const totalBandwidthPercentage = ((last7DaysEvents / previous7DaysEvents)).toFixed(1);
+
+  return { showBandwidthUpIcon, totalBandwidthPercentage };
+}
+
 export const getTotalEventsForTheWeek = (data: IEventItem[], eventType?: EventType) => {
   const labels = getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -7);
 
   return getNumberOfEventsByDate(labels, data, eventType);
 }
 
+export const getTotalDataTraffic = (data: IEventBandwidthItem[]) => {
+  const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -7);
+
+  const totalBytes = labels.reduce((accumulator, label) => {
+    const sumOfLabelData = data
+      .filter(dataItem => dataItem.datetime.startsWith(label))
+      .map(dataItem => +dataItem.bandwidth)
+      .reduce((labelAccumulator, dataItem) => labelAccumulator + dataItem, 0)
+
+    return accumulator + sumOfLabelData;
+  }, 0);
+
+  return mainUtil.unitSeparator(totalBytes.toString());
+}
+
 export const transformEventList = (data: string) => {
   return data
     .split(/\r?\n/)
     .map(rowItem => {
-      const [, dateTimeValue, , value] = rowItem.split(' ');
+      const [, dateTimeValue, , value, , bandwidth] = rowItem.split(' ');
       const [date, time] = dateTimeValue.split('-');
+      const valueToPass = !bandwidth ? value.slice(0, -1) : value;
+      const bandwidthToUse = !bandwidth ? '' : bandwidth.slice(0, -1);
 
-      return { datetime: `${date} ${time}`, value: value.slice(0, -1) };
+      return { datetime: `${date} ${time}`, value: valueToPass, bandwidth: bandwidthToUse };
     });
 }
 
@@ -116,3 +166,25 @@ export const getLineData = (data: IEventItem[]) => {
     ]
   };
 };
+
+export const getTrafficChartData = (data: IEventBandwidthItem[]) => {
+  const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'value', 0);
+
+  return {
+    labels,
+    datasets: labels.map((label, labelIndex) => {
+      const bytesBandwidth = data.reduce((accumulator, item) => item.value === label ? accumulator + +item.bandwidth : accumulator, 0);
+
+      const chartData = Array
+        .from({ length: labels.length })
+        .map((_, index) => index === labelIndex ? bytesBandwidth : 0);
+
+      return {
+        label,
+        data: chartData,
+        fill: false,
+        backgroundColor: Object.values(trafficChartDataColors)[labelIndex]
+      };
+    })
+  };
+}
