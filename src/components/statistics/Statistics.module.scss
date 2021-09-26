@@ -1,3 +1,5 @@
+@import "../../styles/partials/variables";
+
 .card {
   gap: 1em;
   display: flex;
@@ -18,11 +20,11 @@
       letter-spacing: 0.03em;
 
       &-decrease {
-        color: #f42829;
+        color: $bad;
       }
 
       &-increase {
-        color: #18ba92;
+        color: $good;
       }
     }
 

@@ -1,0 +1,1 @@
+export const APP_LOAD_DELAY = 2000;

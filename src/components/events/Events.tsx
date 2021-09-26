@@ -1,166 +1,93 @@
+import { useEffect } from 'react';
+import styles from './Events.module.scss';
+import TrafficIcon from '@mui/icons-material/Traffic';
+import { useDispatch, useSelector } from 'react-redux';
+import { EventType } from './ts/enums/event-type.enum';
+import Loader from '../../ui-components/loader/Loader';
+import SecurityIcon from '@mui/icons-material/Security';
+import BarChart from "../../ui-components/chart/BarChart";
 import CardContainer from "../../ui-components/card/Card";
 import LineChart from "../../ui-components/chart/LineChart";
+import TableComponent from "../../ui-components/table/Table";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import DoughnutChart from "../../ui-components/chart/DoughnutChart";
 import statisticsStyles from "../statistics/Statistics.module.scss";
-import TableComponent from "../../ui-components/table/Table";
-import BarChart from "../../ui-components/chart/BarChart";
-import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import { IEventStore } from '../../store/ts/models/event-store.model';
+import { loadEvents, loadAttackEvents } from '../../store/EventIndex';
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import SecurityIcon from '@mui/icons-material/Security';
-import TrafficIcon from '@mui/icons-material/Traffic';
+import { dougnutOptions, lineOptions } from '../../ui-components/chart/util/chart-util';
+import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
+import * as eventDataUtility from './event-data-util';
+import * as eventsUtil from './events-util';
+import { Skeleton, Stack } from '@mui/material';
 
 const cardWidth = "280px";
 const cardHeight = "104px";
-
-const doughnutData = {
-  labels: ["User Login", "User Logout", "File Data Write", "Service Start", "Malware attack"],
-  datasets: [
-    {
-      label: "Users by devices",
-      data: [12, 19, 3, 5, 6],
-      backgroundColor: ["#FFE576", "#3363FF", "#F65354", "#E18CF9", 'green'],
-      borderWidth: 0,
-    },
-  ],
-};
-
-const lineData = {
-  labels: ['12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '00:00'],
-  datasets: [
-    {
-      label: 'Events',
-      data: [12, 19, 3, 5, 2, 3, 95],
-      fill: false,
-      backgroundColor: '#003CFF',
-      borderColor: 'rgba(0, 60, 255, 0.2)'
-    }
-  ],
-};
 
 const barData = {
   labels: ['443', '80', '445', 'Others'],
   datasets: [
     {
       label: '443',
-      data: [4, 0, 0, 0],
+      data: [54, 0, 0, 0],
       fill: false,
-      backgroundColor: "#FFE576"
+      backgroundColor: eventsUtil.YELLOW_COLOR
     },
     {
       label: '80',
       data: [0, 80, 0, 0],
       fill: false,
-      backgroundColor: "#3363FF"
+      backgroundColor: eventsUtil.BLUE_COLOR
     },
     {
       label: '445',
       data: [0, 0, 445, 0],
       fill: false,
-      backgroundColor: "#F65354"
+      backgroundColor: eventsUtil.RED_COLOR
     },
     {
       label: 'Others',
       data: [0, 0, 0, 1993],
       fill: false,
-      backgroundColor: "#E18CF9"
+      backgroundColor: eventsUtil.PURPLE_COLOR
     }
   ],
 };
 
-const dougnutOptions = {
-  maintainAspectRatio: false,
-  cutout: 95,
-  plugins: {
-    legend: {
-      position: "right",
-      labels: {
-        usePointStyle: true,
-        boxWidth: 8,
-        font: {
-          size: 13,
-          weight: 400
-        },
-      },
-      onHover: (event: { native: MouseEvent }) =>
-        ((event.native.target as HTMLCanvasElement).style.cursor = "pointer"),
-    },
-    tooltip: {
-      displayColors: false,
-      bodyFont: {
-        size: 14,
-        weight: 600
-      },
-      callbacks: {
-        label: (tooltipItem: { formattedValue: string }) => tooltipItem.formattedValue + '%'
-      }
-    }
-  },
-  onHover: (event: { native: MouseEvent }) =>
-    ((event.native.target as HTMLCanvasElement).style.cursor = "default")
-};
-
-const keywordHeaders = [
+const attackHeaders = [
   { value: 'Attacker', alignment: TableAlignment.LEFT },
-  { value: 'Number of attacks', alignment: TableAlignment.RIGHT },
-  { value: 'Ban will reset', alignment: TableAlignment.RIGHT }
+  { value: 'Number of attacks', alignment: TableAlignment.RIGHT }
 ];
-
-const keywordRows = [
-  { data: [{ 'row-0': '88.45.65.24', alignment: TableAlignment.LEFT }, { 'row-1': 5, alignment: TableAlignment.RIGHT }, { 'row-2': '7h 30 min', alignment: TableAlignment.RIGHT }] },
-  { data: [{ 'row-0': '192.168.0.65', alignment: TableAlignment.LEFT }, { 'row-1': 4, alignment: TableAlignment.RIGHT }, { 'row-2': '2h 50 min', alignment: TableAlignment.RIGHT }] },
-  { data: [{ 'row-0': '74.145.65.98', alignment: TableAlignment.LEFT }, { 'row-1': 14, alignment: TableAlignment.RIGHT }, { 'row-2': '7d 5h 35 min', alignment: TableAlignment.RIGHT }] },
-  { data: [{ 'row-0': '11.11.11.12', alignment: TableAlignment.LEFT }, { 'row-1': 12, alignment: TableAlignment.RIGHT }, { 'row-2': '6d 1h 20 min', alignment: TableAlignment.RIGHT }] },
-  { data: [{ 'row-0': '96.56.7.45', alignment: TableAlignment.LEFT }, { 'row-1': 47, alignment: TableAlignment.RIGHT }, { 'row-2': '1d 1h 10 min', alignment: TableAlignment.RIGHT }] }
-];
-
-const lineOptions = {
-  maintainAspectRatio: false,
-  plugins: {
-    legend: {
-      labels: {
-        padding: 20,
-        usePointStyle: true,
-        boxWidth: 8,
-        font: {
-          size: 12,
-          weight: 400
-        },
-      },
-      onHover: (event: { native: MouseEvent }) =>
-        ((event.native.target as HTMLCanvasElement).style.cursor = "pointer")
-    },
-  },
-  scales: {
-    x: {
-      stacked: true,
-      grid: {
-        display: false
-      },
-      ticks: {
-        font: {
-          size: 12
-        }
-      }
-    },
-    y: {
-      stacked: true,
-      ticks: {
-        font: {
-          size: 13,
-          weight: 400
-        }
-      }
-    }
-  },
-  onHover: (event: { native: MouseEvent }) =>
-    ((event.native.target as HTMLCanvasElement).style.cursor = "default")
-};
 
 const Events = () => {
+  const dispatch = useDispatch();
+  const { isLoading, data, attackData } = useSelector((state: IEventStore) => state.events);
+
+  const {
+    showUpIcon: showEventsUpIcon, totalPercentage: totalEventsPercentage
+  } = eventDataUtility.getTotalEventsPercentage(data);
+  const {
+    showUpIcon: showAttacksUpIcon, totalPercentage: totalAttacksPercentage
+  } = eventDataUtility.getTotalEventsPercentage(data, EventType.MALWARE_ATTACK);
+
+  useEffect(() => {
+    dispatch(loadEvents());
+    dispatch(loadAttackEvents());
+  }, [dispatch]);
+
   return (
     <>
+      <Loader isLoading={isLoading}></Loader>
+
       <div className={statisticsStyles.card}>
+        {/* {
+          isLoading &&   <Stack spacing={1} direction="row" alignItems="center">
+          <Skeleton variant="circular" width={70} height={70} />
+          <Skeleton variant="rectangular" width={210} height={cardHeight} />
+        </Stack>
+        } */}
+
         <CardContainer style={{ width: cardWidth, height: cardHeight }}>
           <div className={statisticsStyles["card__content"]}>
             <span
@@ -170,12 +97,14 @@ const Events = () => {
             </span>
             <div>
               <h3 className={statisticsStyles["card__content--value"]}>
-                245
+                {eventDataUtility.getTotalEventsForTheWeek(data)}
                 <span
-                  className={`${statisticsStyles["card__content--subheader"]} ${statisticsStyles["card__content--subheader-decrease"]}`}
+                  className={`${statisticsStyles["card__content--subheader"]} 
+                  ${statisticsStyles[`card__content--subheader-${showEventsUpIcon ? 'increase' : 'decrease'}`]}`}
                 >
-                  <KeyboardArrowDownIcon />
-                  23.74%
+                  {!showEventsUpIcon && <KeyboardArrowDownIcon />}
+                  {showEventsUpIcon && <KeyboardArrowUpIcon />}
+                  {totalEventsPercentage}%
                 </span>
               </h3>
               <span className={statisticsStyles["card__content--label"]}>
@@ -194,12 +123,14 @@ const Events = () => {
             </span>
             <div>
               <h3 className={statisticsStyles["card__content--value"]}>
-                55
+                {eventDataUtility.getTotalEventsForTheWeek(data, EventType.MALWARE_ATTACK)}
                 <span
-                  className={`${statisticsStyles["card__content--subheader"]} ${statisticsStyles["card__content--subheader-decrease"]}`}
+                  className={`${statisticsStyles["card__content--subheader"]} 
+                  ${statisticsStyles[`card__content--subheader-${showAttacksUpIcon ? 'increase' : 'decrease'}`]}`}
                 >
-                  <KeyboardArrowDownIcon />
-                  23.74%
+                  {!showAttacksUpIcon && <KeyboardArrowDownIcon />}
+                  {showAttacksUpIcon && <KeyboardArrowUpIcon />}
+                  {totalAttacksPercentage}%
                 </span>
               </h3>
               <span className={statisticsStyles["card__content--label"]}>
@@ -218,7 +149,8 @@ const Events = () => {
             </span>
             <div>
               <h3 className={statisticsStyles["card__content--value"]}>
-                5MB
+                52
+                <span className={styles.unit}>MB</span>
                 <span
                   className={`${statisticsStyles["card__content--subheader"]} ${statisticsStyles["card__content--subheader-decrease"]}`}
                 >
@@ -239,9 +171,9 @@ const Events = () => {
           style={{ width: '700px', height: '300px' }}
         >
           <div className={`${statisticsStyles["card__content--chart"]}`}>
-            <h3>All Events</h3>
+            <h3>All Events - last 7 days</h3>
 
-            <LineChart data={lineData} options={lineOptions} width={650} height={190}></LineChart>
+            <LineChart data={eventDataUtility.getLineData(data)} options={lineOptions} width={650} height={230}></LineChart>
           </div>
         </CardContainer>
 
@@ -251,7 +183,7 @@ const Events = () => {
           <div className={`${statisticsStyles["card__content--chart"]}`}>
             <h3>All events by event type</h3>
 
-            <DoughnutChart data={doughnutData} options={dougnutOptions} width={350} height={250}
+            <DoughnutChart data={eventDataUtility.getDoughnutData(data)} options={dougnutOptions} width={350} height={250}
             >
             </DoughnutChart>
           </div>
@@ -264,7 +196,7 @@ const Events = () => {
             <h3>Attackers</h3>
 
             <div className={`${statisticsStyles["card__content"]}`}>
-              <TableComponent rows={keywordRows} headers={keywordHeaders} minWidth={450}></TableComponent>
+              <TableComponent rows={eventDataUtility.getAttackTableRows(attackData)} headers={attackHeaders} minWidth={450}></TableComponent>
             </div>
           </div>
         </CardContainer>
@@ -275,7 +207,7 @@ const Events = () => {
           <div className={`${statisticsStyles["card__content--chart"]}`}>
             <h3>Traffic by destination port</h3>
 
-            <BarChart data={barData} options={lineOptions} width={550} height={190}></BarChart>
+            <BarChart data={barData} options={lineOptions} width={560} height={190}></BarChart>
           </div>
         </CardContainer>
       </div>
