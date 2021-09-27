@@ -6,7 +6,9 @@ export interface IEventStore {
     events: {
         isLoading: boolean;
         data: IEventItem[];
+        showErrorModal: boolean;
         attackData: IEventAttackItem[];
         bandwidthData: IEventBandwidthItem[];
     }
 }
+ 

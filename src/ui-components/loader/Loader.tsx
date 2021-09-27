@@ -1,14 +1,17 @@
-import { Backdrop, CircularProgress } from '@mui/material';
-import * as eventsUtil from '../../components/events/events-util';
+import { Backdrop } from '@mui/material';
+import { ILoaderProps } from './ts/models/loader-props.model';
 
-const Loader = (props: { isLoading: boolean }) => {
+const Loader = (props: ILoaderProps) => {
+    const { show, color, children } = props;
+    const colorToUse = !color ? 'black' : color;
+
     return (
         <>
             <Backdrop
-                sx={{ color: eventsUtil.BLUE_COLOR, zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={props.isLoading}
+                sx={{ color: colorToUse, zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={show}
             >
-                <CircularProgress color="inherit" />
+                {children}
             </Backdrop>
         </>
     );

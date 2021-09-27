@@ -3,8 +3,8 @@ import { IEventItem } from "./ts/models/event-item.model";
 import { IEventAttackItem } from "./ts/models/event-attack-item.model";
 import { IEventBandwidthItem } from "./ts/models/event-bandwidth-item.model";
 import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
-import * as eventsUtil from './events-util';
 import * as mainUtil from '../../utils/main-util';
+import * as eventsUtil from './events-util';
 
 const trafficChartDataColors = [
   eventsUtil.YELLOW_COLOR, eventsUtil.BLUE_COLOR, eventsUtil.RED_COLOR, eventsUtil.PURPLE_COLOR
@@ -99,20 +99,22 @@ export const getTotalDataTraffic = (data: IEventBandwidthItem[]) => {
     return accumulator + sumOfLabelData;
   }, 0);
 
-  return mainUtil.unitSeparator(totalBytes.toString());
+  return mainUtil.unitSeparator(totalBytes.toString()) + 'B';
 }
 
-export const transformEventList = (data: string) => {
-  return data
+export const transformEventList = (data: string | null) => {
+  if (data) {
+    return data
     .split(/\r?\n/)
     .map(rowItem => {
       const [, dateTimeValue, , value, , bandwidth] = rowItem.split(' ');
       const [date, time] = dateTimeValue.split('-');
-      const valueToPass = !bandwidth ? value.slice(0, -1) : value;
-      const bandwidthToUse = !bandwidth ? '' : bandwidth.slice(0, -1);
 
-      return { datetime: `${date} ${time}`, value: valueToPass, bandwidth: bandwidthToUse };
+      return { datetime: `${date} ${time}`, value, bandwidth };
     });
+  }
+
+  return [];
 }
 
 export const getDoughnutData = (data: IEventItem[]) => {

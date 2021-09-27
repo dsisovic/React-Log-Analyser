@@ -1,9 +1,15 @@
 import "./App.scss";
+import React, { Suspense } from "react";
 import Users from "./components/users/Users";
-import Events from "./components/events/Events";
+import Modal from "./ui-components/modal/Modal";
+import { CircularProgress } from "@mui/material";
 import Sidebar from "./components/sidebar/Sidebar";
 import { Route, Redirect, Switch } from "react-router";
+import NotFound from "./components/not-found/NotFound";
 import Statistics from "./components/statistics/Statistics";
+import * as eventUtil from './components/events/events-util';
+
+const EventsLazyComponent = React.lazy(() => import('./components/events/Events'));
 
 const App = () => {
   return (
@@ -26,8 +32,17 @@ const App = () => {
               <Users></Users>
             </Route>
 
+            <Route path="/events" exact>
+              <Suspense fallback={
+                <Modal show={true} color={eventUtil.BLUE_COLOR}>
+                  <CircularProgress color="inherit" />
+                </Modal>}>
+                <EventsLazyComponent />
+              </Suspense>
+            </Route>
+
             <Route path="*">
-            <Events></Events>
+              <NotFound></NotFound>
             </Route>
           </Switch>
         </div>
