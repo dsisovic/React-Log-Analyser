@@ -4,10 +4,9 @@ import { IEventAttackItem } from "./ts/models/event-attack-item.model";
 import { IEventBandwidthItem } from "./ts/models/event-bandwidth-item.model";
 import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as mainUtil from '../../utils/main-util';
-import * as eventsUtil from './events-util';
 
 const trafficChartDataColors = [
-  eventsUtil.YELLOW_COLOR, eventsUtil.BLUE_COLOR, eventsUtil.RED_COLOR, eventsUtil.PURPLE_COLOR
+  mainUtil.YELLOW_COLOR, mainUtil.BLUE_COLOR, mainUtil.RED_COLOR, mainUtil.PURPLE_COLOR
 ];
 
 const getPiePercentage = (data: IEventItem[], typeValue: EventType) => {
@@ -131,8 +130,8 @@ export const getDoughnutData = (data: IEventItem[]) => {
         label: "",
         data: [userLogin, userLogout, serviceStart, fileDataWrite, malwareAttacks],
         backgroundColor: [
-          eventsUtil.BLUE_COLOR, eventsUtil.YELLOW_COLOR,
-          eventsUtil.PURPLE_COLOR, eventsUtil.GREEN_COLOR, eventsUtil.RED_COLOR
+          mainUtil.BLUE_COLOR, mainUtil.YELLOW_COLOR,
+          mainUtil.PURPLE_COLOR, mainUtil.GREEN_COLOR, mainUtil.RED_COLOR
         ],
         borderWidth: 0,
       },
@@ -156,8 +155,8 @@ export const getLineData = (data: IEventItem[]) => {
         label: 'Number of events',
         data: chartData,
         fill: false,
-        backgroundColor: eventsUtil.BLUE_COLOR,
-        borderColor: eventsUtil.LIGHT_BLUE_COLOR
+        backgroundColor: mainUtil.BLUE_COLOR,
+        borderColor: mainUtil.LIGHT_BLUE_COLOR
       }
     ]
   };

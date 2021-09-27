@@ -7,7 +7,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { Route, Redirect, Switch } from "react-router";
 import NotFound from "./components/not-found/NotFound";
 import Statistics from "./components/statistics/Statistics";
-import * as eventUtil from './components/events/events-util';
+import * as mainUtil from './utils/main-util';
 
 const EventsLazyComponent = React.lazy(() => import('./components/events/Events'));
 
@@ -34,7 +34,7 @@ const App = () => {
 
             <Route path="/events" exact>
               <Suspense fallback={
-                <Modal show={true} color={eventUtil.BLUE_COLOR}>
+                <Modal show={true} color={mainUtil.BLUE_COLOR}>
                   <CircularProgress color="inherit" />
                 </Modal>}>
                 <EventsLazyComponent />

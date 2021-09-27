@@ -1,0 +1,207 @@
+DT: 13/09/2021-00:00:00 K: esentico boki
+DT: 13/09/2021-02:00:00 K: ruska caga
+DT: 13/09/2021-02:05:00 K: lekovi cajetina
+DT: 13/09/2021-04:00:00 K: cajetina esentico
+DT: 13/09/2021-06:00:00 K: bojan pelverovic
+DT: 13/09/2021-08:00:00 K: ruska carska caga
+DT: 13/09/2021-10:00:00 K: esentico boki
+DT: 13/09/2021-12:00:00 K: ruska carska caga
+DT: 13/09/2021-14:00:00 K: esentico boki
+DT: 13/09/2021-16:00:00 K: esentico boki
+DT: 13/09/2021-18:00:00 K: ruska caga
+DT: 13/09/2021-20:00:00 K: esentico boki
+DT: 13/09/2021-22:00:00 K: cajetina esentico
+DT: 14/09/2021-00:00:00 K: cajetina esentico
+DT: 14/09/2021-01:00:00 K: ruska caga
+DT: 14/09/2021-02:00:00 K: lekovi cajetina
+DT: 14/09/2021-04:00:00 K: esentico boki
+DT: 14/09/2021-06:00:00 K: lekovi cajetina
+DT: 14/09/2021-08:00:00 K: ruska carska caga
+DT: 14/09/2021-10:00:00 K: bojan pelverovic
+DT: 14/09/2021-12:00:00 K: lekovi cajetina
+DT: 14/09/2021-14:00:00 K: cajetina esentico
+DT: 14/09/2021-16:00:00 K: lekovi cajetina
+DT: 14/09/2021-18:00:00 K: esentico boki
+DT: 14/09/2021-20:00:00 K: esentico boki
+DT: 14/09/2021-22:00:00 K: esentico boki
+DT: 15/09/2021-00:00:00 K: ruska caga
+DT: 15/09/2021-02:00:00 K: esentico boki
+DT: 15/09/2021-04:00:00 K: esentico boki
+DT: 15/09/2021-06:00:00 K: esentico boki
+DT: 15/09/2021-08:00:00 K: esentico boki
+DT: 15/09/2021-10:00:00 K: esentico boki
+DT: 15/09/2021-12:00:00 K: ruska caga
+DT: 15/09/2021-14:00:00 K: esentico boki
+DT: 15/09/2021-16:00:00 K: ruska carska caga
+DT: 15/09/2021-18:00:00 K: lekovi cajetina
+DT: 15/09/2021-20:00:00 K: bojan pelverovic
+DT: 15/09/2021-22:00:00 K: lekovi cajetina
+DT: 16/09/2021-00:00:00 K: esentico boki
+DT: 16/09/2021-02:00:00 K: esentico boki
+DT: 16/09/2021-04:00:00 K: lekovi cajetina
+DT: 16/09/2021-06:00:00 K: esentico boki
+DT: 16/09/2021-08:00:00 K: esentico boki
+DT: 16/09/2021-10:00:00 K: esentico boki
+DT: 16/09/2021-12:00:00 K: esentico boki
+DT: 16/09/2021-14:00:00 K: cajetina esentico
+DT: 16/09/2021-16:00:00 K: esentico boki
+DT: 16/09/2021-18:00:00 K: esentico boki
+DT: 16/09/2021-20:00:00 K: ruska carska caga
+DT: 16/09/2021-22:00:00 K: esentico boki
+DT: 17/09/2021-00:00:00 K: lekovi cajetina
+DT: 17/09/2021-02:00:00 K: ruska caga
+DT: 17/09/2021-04:00:00 K: esentico boki
+DT: 17/09/2021-06:00:00 K: ruska caga
+DT: 17/09/2021-08:00:00 K: esentico boki
+DT: 17/09/2021-10:00:00 K: esentico boki
+DT: 17/09/2021-12:00:00 K: esentico boki
+DT: 17/09/2021-14:00:00 K: cajetina esentico
+DT: 17/09/2021-16:00:00 K: esentico boki
+DT: 17/09/2021-18:00:00 K: bojan pelverovic
+DT: 17/09/2021-20:00:00 K: lekovi cajetina
+DT: 17/09/2021-22:00:00 K: esentico boki
+DT: 18/09/2021-00:00:00 K: cajetina esentico
+DT: 18/09/2021-02:00:00 K: ruska carska caga
+DT: 18/09/2021-04:00:00 K: lekovi cajetina
+DT: 18/09/2021-06:00:00 K: esentico boki
+DT: 18/09/2021-08:00:00 K: esentico boki
+DT: 18/09/2021-10:00:00 K: esentico boki
+DT: 18/09/2021-12:00:00 K: ruska caga
+DT: 18/09/2021-14:00:00 K: esentico boki
+DT: 18/09/2021-16:00:00 K: esentico boki
+DT: 18/09/2021-18:00:00 K: ruska caga
+DT: 18/09/2021-20:00:00 K: lekovi cajetina
+DT: 18/09/2021-22:00:00 K: esentico boki
+DT: 19/09/2021-00:00:00 K: ruska caga
+DT: 19/09/2021-02:00:00 K: bojan pelverovic
+DT: 19/09/2021-04:00:00 K: cajetina esentico
+DT: 19/09/2021-06:00:00 K: lekovi cajetina
+DT: 19/09/2021-08:00:00 K: lekovi cajetina
+DT: 19/09/2021-10:00:00 K: ruska carska caga
+DT: 19/09/2021-12:00:00 K: esentico boki
+DT: 19/09/2021-14:00:00 K: lekovi cajetina
+DT: 19/09/2021-16:00:00 K: esentico boki
+DT: 19/09/2021-18:00:00 K: esentico boki
+DT: 19/09/2021-20:00:00 K: esentico boki
+DT: 19/09/2021-22:00:00 K: ruska caga
+DT: 20/09/2021-00:00:00 K: esentico boki
+DT: 20/09/2021-02:00:00 K: esentico boki
+DT: 20/09/2021-04:00:00 K: lekovi cajetina
+DT: 20/09/2021-06:00:00 K: esentico boki
+DT: 20/09/2021-08:00:00 K: ruska caga
+DT: 20/09/2021-10:00:00 K: cajetina esentico
+DT: 20/09/2021-12:00:00 K: ruska carska caga
+DT: 20/09/2021-14:00:00 K: cajetina esentico
+DT: 20/09/2021-16:00:00 K: bojan pelverovic
+DT: 20/09/2021-18:00:00 K: lekovi cajetina
+DT: 20/09/2021-20:00:00 K: esentico boki
+DT: 20/09/2021-22:00:00 K: esentico boki
+DT: 21/09/2021-00:00:00 K: ruska carska caga
+DT: 21/09/2021-02:00:00 K: esentico boki
+DT: 21/09/2021-04:00:00 K: ruska carska caga
+DT: 21/09/2021-06:00:00 K: ruska carska caga
+DT: 21/09/2021-08:00:00 K: lekovi cajetina
+DT: 21/09/2021-10:00:00 K: esentico boki
+DT: 21/09/2021-12:00:00 K: esentico boki
+DT: 21/09/2021-14:00:00 K: lekovi cajetina
+DT: 21/09/2021-16:00:00 K: esentico boki
+DT: 21/09/2021-18:00:00 K: cajetina esentico
+DT: 21/09/2021-20:00:00 K: esentico boki
+DT: 21/09/2021-22:00:00 K: ruska caga
+DT: 22/09/2021-00:00:00 K: esentico boki
+DT: 22/09/2021-02:00:00 K: esentico boki
+DT: 22/09/2021-04:00:00 K: lekovi cajetina
+DT: 22/09/2021-06:00:00 K: esentico boki
+DT: 22/09/2021-08:00:00 K: ruska carska caga
+DT: 22/09/2021-10:00:00 K: bojan pelverovic
+DT: 22/09/2021-12:00:00 K: ruska carska caga
+DT: 22/09/2021-14:00:00 K: esentico boki
+DT: 22/09/2021-16:00:00 K: lekovi cajetina
+DT: 22/09/2021-18:00:00 K: esentico boki
+DT: 22/09/2021-18:41:11 K: lekovi cajetina
+DT: 22/09/2021-19:00:00 K: esentico boki
+DT: 22/09/2021-20:00:00 K: ruska caga
+DT: 22/09/2021-22:00:00 K: esentico boki
+DT: 23/09/2021-00:00:00 K: cajetina esentico
+DT: 23/09/2021-02:00:00 K: esentico boki
+DT: 23/09/2021-04:00:00 K: cajetina esentico
+DT: 23/09/2021-06:00:00 K: esentico boki
+DT: 23/09/2021-08:00:00 K: ruska caga
+DT: 23/09/2021-10:00:00 K: esentico boki
+DT: 23/09/2021-12:00:00 K: esentico boki
+DT: 23/09/2021-14:00:00 K: esentico boki
+DT: 23/09/2021-16:00:00 K: esentico boki
+DT: 23/09/2021-17:00:00 K: lekovi cajetina
+DT: 23/09/2021-18:00:00 K: bojan pelverovic
+DT: 23/09/2021-20:00:00 K: esentico boki
+DT: 23/09/2021-22:00:00 K: lekovi cajetina
+DT: 24/09/2021-00:00:00 K: ruska carska caga
+DT: 24/09/2021-02:00:00 K: esentico boki
+DT: 24/09/2021-04:00:00 K: lekovi cajetina
+DT: 24/09/2021-06:00:00 K: cajetina esentico
+DT: 24/09/2021-08:00:00 K: esentico boki
+DT: 24/09/2021-10:00:00 K: ruska caga
+DT: 24/09/2021-12:00:00 K: esentico boki
+DT: 24/09/2021-14:00:00 K: esentico boki
+DT: 24/09/2021-16:00:00 K: esentico boki
+DT: 24/09/2021-18:00:00 K: ruska caga
+DT: 24/09/2021-18:01:00 K: esentico boki
+DT: 24/09/2021-18:02:00 K: esentico boki
+DT: 24/09/2021-20:00:00 K: lekovi cajetina
+DT: 24/09/2021-22:00:00 K: bojan pelverovic
+DT: 25/09/2021-00:00:00 K: ruska carska caga
+DT: 25/09/2021-02:00:00 K: esentico boki
+DT: 25/09/2021-04:00:00 K: ruska carska caga
+DT: 25/09/2021-06:00:00 K: esentico boki
+DT: 25/09/2021-08:00:00 K: ruska carska caga
+DT: 25/09/2021-10:00:00 K: cajetina esentico
+DT: 25/09/2021-12:00:00 K: lekovi cajetina
+DT: 25/09/2021-14:00:00 K: lekovi cajetina
+DT: 25/09/2021-14:01:01 K: lekovi cajetina
+DT: 25/09/2021-16:00:00 K: esentico boki
+DT: 25/09/2021-18:00:00 K: esentico boki
+DT: 25/09/2021-20:00:00 K: esentico boki
+DT: 25/09/2021-22:00:00 K: ruska caga
+DT: 26/09/2021-00:00:00 K: esentico boki
+DT: 26/09/2021-02:00:00 K: bojan pelverovic
+DT: 26/09/2021-04:00:00 K: bojan pelverovic
+DT: 26/09/2021-06:00:00 K: lekovi cajetina
+DT: 26/09/2021-08:00:00 K: esentico boki
+DT: 26/09/2021-10:00:00 K: esentico boki
+DT: 26/09/2021-12:00:00 K: cajetina esentico
+DT: 26/09/2021-14:00:00 K: esentico boki
+DT: 26/09/2021-14:01:00 K: esentico boki
+DT: 26/09/2021-14:02:00 K: esentico boki
+DT: 26/09/2021-14:03:00 K: ruska caga
+DT: 26/09/2021-14:04:00 K: ruska carska caga
+DT: 26/09/2021-14:05:00 K: esentico boki
+DT: 26/09/2021-14:06:00 K: esentico boki
+DT: 26/09/2021-14:07:00 K: lekovi cajetina
+DT: 26/09/2021-14:08:00 K: esentico boki
+DT: 26/09/2021-14:09:00 K: cajetina esentico
+DT: 26/09/2021-14:10:00 K: esentico boki
+DT: 26/09/2021-14:11:00 K: ruska caga
+DT: 26/09/2021-14:12:00 K: ruska carska caga
+DT: 26/09/2021-14:13:00 K: bojan pelverovic
+DT: 26/09/2021-14:14:00 K: lekovi cajetina
+DT: 26/09/2021-14:15:00 K: esentico boki
+DT: 26/09/2021-14:16:00 K: esentico boki
+DT: 26/09/2021-14:17:00 K: ruska caga
+DT: 26/09/2021-14:18:00 K: esentico boki
+DT: 26/09/2021-14:19:00 K: ruska carska caga
+DT: 26/09/2021-14:20:00 K: esentico boki
+DT: 26/09/2021-14:21:00 K: cajetina esentico
+DT: 26/09/2021-14:22:00 K: esentico boki
+DT: 26/09/2021-14:23:00 K: lekovi cajetina
+DT: 26/09/2021-14:24:00 K: esentico boki
+DT: 26/09/2021-16:00:00 K: esentico boki
+DT: 26/09/2021-18:00:00 K: ruska caga
+DT: 26/09/2021-20:00:00 K: esentico boki
+DT: 26/09/2021-22:00:00 K: ruska carska caga
+DT: 26/09/2021-22:22:25 K: ruska caga
+DT: 26/09/2021-22:22:26 K: ruska caga
+DT: 26/09/2021-22:22:27 K: esentico boki
+DT: 26/09/2021-22:22:28 K: ruska caga
+DT: 26/09/2021-22:22:29 K: lekovi cajetina
+DT: 26/09/2021-22:22:30 K: bojan pelverovic
+DT: 26/09/2021-22:22:31 K: ruska caga

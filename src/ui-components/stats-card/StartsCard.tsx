@@ -1,11 +1,11 @@
 import React from 'react';
-import CardContainer from "../../ui-components/card/Card";
-import statisticsStyles from "../statistics/Statistics.module.scss";
-import { IEventCardProps } from "./ts/models/event-card-props.model";
+import CardContainer from "../card/Card";
+import { IEventCardProps } from "./ts/event-card-props.model";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import statisticsStyles from "../../components/statistics/Statistics.module.scss";
 
-const EventsCard = (props: IEventCardProps) => {
+const StatsCard = (props: IEventCardProps) => {
     return (
         <>
             <CardContainer style={{ width: props.cardWidth, height: props.cardHeight }}>
@@ -22,9 +22,9 @@ const EventsCard = (props: IEventCardProps) => {
                                 className={`${statisticsStyles["card__content--subheader"]} 
                   ${statisticsStyles[`card__content--subheader-${props.showUpIcon ? 'increase' : 'decrease'}`]}`}
                             >
-                                {!props.showUpIcon && <KeyboardArrowDownIcon />}
-                                {props.showUpIcon && <KeyboardArrowUpIcon />}
-                                {props.totalEventsPercentage}%
+                                {props.showPercentageIcon && !props.showUpIcon && <KeyboardArrowDownIcon />}
+                                {props.showPercentageIcon && props.showUpIcon && <KeyboardArrowUpIcon />}
+                                {props.totalEventsPercentage}{props.showPercentageIcon && '%'}
                             </span>
                         </h3>
                         <span className={statisticsStyles["card__content--label"]}>
@@ -37,4 +37,4 @@ const EventsCard = (props: IEventCardProps) => {
     );
 };
 
-export default React.memo(EventsCard);
+export default React.memo(StatsCard);

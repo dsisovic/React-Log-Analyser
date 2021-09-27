@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const eventStoreReducer = createSlice({
-    name: 'eventReducer',
+    name: 'eventStore',
     initialState,
     reducers: {
         finishLoading(state, action) {

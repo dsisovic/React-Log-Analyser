@@ -1,4 +1,3 @@
-import EventsCard from './EventsCard';
 import Modal from '../../ui-components/modal/Modal';
 import { loadEvents } from '../../store/EventIndex';
 import TrafficIcon from '@mui/icons-material/Traffic';
@@ -11,6 +10,7 @@ import CardContainer from "../../ui-components/card/Card";
 import LineChart from "../../ui-components/chart/LineChart";
 import TableComponent from "../../ui-components/table/Table";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import StatsCard from '../../ui-components/stats-card/StartsCard';
 import DoughnutChart from "../../ui-components/chart/DoughnutChart";
 import statisticsStyles from "../statistics/Statistics.module.scss";
 import { IEventStore } from '../../store/ts/models/event-store.model';
@@ -19,7 +19,7 @@ import { Alert, AlertTitle, CircularProgress, Skeleton } from '@mui/material';
 import { dougnutOptions, getLineOptions } from '../../ui-components/chart/util/chart-util';
 import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as eventDataUtility from './event-data-util';
-import * as eventUtil from './events-util';
+import * as mainUtil from '../../utils/main-util';
 
 const cardWidth = "280px";
 const cardHeight = "104px";
@@ -38,7 +38,7 @@ const Events = () => {
   const memoizedBarOptions = useMemo(() => getLineOptions('B'), []);
 
   useEffect(() => {
-    dispatch(loadEvents());
+    dispatch(loadEvents()); 
   }, [dispatch]);
 
   const { isLoading, data, attackData, bandwidthData, showErrorModal } = useSelector((state: IEventStore) => state.events);
@@ -58,7 +58,7 @@ const Events = () => {
 
   return (
     <>
-      <Modal show={isLoading} color={eventUtil.BLUE_COLOR}>
+      <Modal show={isLoading} color={mainUtil.BLUE_COLOR}>
         <CircularProgress color="inherit" />
       </Modal>
 
@@ -79,8 +79,8 @@ const Events = () => {
 
         {
           !isLoading &&
-          <EventsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<ManageSearchIcon sx={{ fontSize: 35, color: eventUtil.BLUE_BACKGROUND }} />}
-            percentageCallback={totalPercentage} showUpIcon={showEventsUpIcon} totalEventsPercentage={totalEventsPercentage}
+          <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<ManageSearchIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
+            percentageCallback={totalPercentage} showUpIcon={showEventsUpIcon} totalEventsPercentage={totalEventsPercentage} showPercentageIcon={true}
             label="Total events this week"
           />
         }
@@ -94,8 +94,8 @@ const Events = () => {
 
         {
           !isLoading &&
-          <EventsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<SecurityIcon sx={{ fontSize: 35, color: eventUtil.BLUE_BACKGROUND }} />}
-            percentageCallback={numberOfAttacks} showUpIcon={showAttacksUpIcon} totalEventsPercentage={totalAttacksPercentage}
+          <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<SecurityIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
+            percentageCallback={numberOfAttacks} showUpIcon={showAttacksUpIcon} totalEventsPercentage={totalAttacksPercentage} showPercentageIcon={true}
             label="Blocked attacks this week"
           />
         }
@@ -108,8 +108,8 @@ const Events = () => {
         }
 
         {!isLoading &&
-          <EventsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<TrafficIcon sx={{ fontSize: 35, color: eventUtil.BLUE_BACKGROUND }} />}
-            percentageCallback={bandwidth} showUpIcon={showBandwidthUpIcon} totalEventsPercentage={totalBandwidthPercentage}
+          <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<TrafficIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
+            percentageCallback={bandwidth} showUpIcon={showBandwidthUpIcon} totalEventsPercentage={totalBandwidthPercentage} showPercentageIcon={true}
             label=" Data exchanged this week"
           />}
       </div>
