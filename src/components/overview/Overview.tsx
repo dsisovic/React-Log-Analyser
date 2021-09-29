@@ -1,5 +1,6 @@
 import { Skeleton } from "@mui/material";
 import styles from "./Overview.module.scss";
+import { useTranslation } from "react-i18next";
 import PublicIcon from "@mui/icons-material/Public";
 import { UserType } from "./ts/enums/user-type.enum";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,24 +17,14 @@ import StartsCard from "../../ui-components/stats-card/StatsCard";
 import LoaderStack from "../../ui-components/loader-stack/LoaderStack";
 import ModuleModal from "../../ui-components/module-modal/ModuleModal";
 import { getLineOptions } from "../../ui-components/chart/util/chart-util";
-import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as overviewDataUtil from './overview-data-util';
 import * as mainUtil from '../../utils/main-util';
 
 const cardWidth = "280px";
 const cardHeight = "104px";
 
-const refferalsTableHeaders = [
-  { value: 'Source', alignment: TableAlignment.LEFT },
-  { value: 'Users', alignment: TableAlignment.RIGHT }
-];
-
-const pageVisitsTableHeaders = [
-  { value: 'Page', alignment: TableAlignment.LEFT },
-  { value: 'Number of users', alignment: TableAlignment.RIGHT }
-];
-
 const Overview = () => {
+  const { t } = useTranslation('index');
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,10 +34,11 @@ const Overview = () => {
   const { isLoading, showErrorModal, activeUsers, visitors, referrals, pages } = useSelector((state: IOverviewStore) => state.overview);
 
   const memoizedLineOptions = useMemo(() => getLineOptions(), []);
-  const memoizedReferralsTableHeaders = useMemo(() => refferalsTableHeaders, []);
-  const memoizedPageVisitsTableHeaders = useMemo(() => pageVisitsTableHeaders, []);
+  const pageVisitsTableHeaders = mainUtil.getTableHeaders([t('overview.page'), t('overview.users')], 2);
+  const referrentTableHeaders = mainUtil.getTableHeaders([t('overview.referrent'), t('overview.users')], 2);
 
   const totalNumberOfVisitors = overviewDataUtil.getTotalNumberOfVisitors(visitors);
+  const chartDataCallback = overviewDataUtil.getLineChartVisitorsData(visitors, t('overview.chartLabel1'), t('overview.chartLabel2'));
 
   const onlineUsersCallback = useCallback(() => overviewDataUtil.getOnlineUsers(activeUsers), [activeUsers]);
   const newUsersCallback = useCallback(() => overviewDataUtil.getNumberOfVisitors(visitors, UserType.NEW), [visitors]);
@@ -69,7 +61,7 @@ const Overview = () => {
 
         {!isLoading && <StartsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<PublicIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
           percentageCallback={onlineUsersCallback} totalEventsPercentage={''} showPercentageIcon={false}
-          label="Online users"
+          label={t('overview.card1')}
         />}
 
         {isLoading && <LoaderStack>
@@ -80,7 +72,7 @@ const Overview = () => {
 
         {!isLoading && <StartsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<PersonAddIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
           percentageCallback={newUsersCallback} totalEventsPercentage={totalNewUsers} showPercentageIcon={true} showUpIcon={showUpNewVisitors}
-          label="New visitors this week"
+          label={t('overview.card2')}
         />}
 
         {isLoading && <LoaderStack>
@@ -91,7 +83,7 @@ const Overview = () => {
 
         {!isLoading && <StartsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<VerifiedUserIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
           percentageCallback={existingUsersCallback} totalEventsPercentage={totalExistingUsers} showPercentageIcon={true} showUpIcon={showUpExistingVisitors}
-          label="Returned visitors this week"
+          label={t('overview.card3')}
         />}
 
       </div>
@@ -107,11 +99,11 @@ const Overview = () => {
           style={{ width: '1015px', height: '336px' }}
         >
           <div className={`${styles["card__content--chart"]}`}>
-            <h3>Visitors</h3>
+            <h3>{t('overview.chartTitle')}</h3>
 
             <h2 className={`${styles['card__content--chart-subheader']}`}>{totalNumberOfVisitors}</h2>
 
-            <LineChart data={overviewDataUtil.getLineChartVisitorsData(visitors)} options={memoizedLineOptions} width={970} height={200}></LineChart>
+            <LineChart data={chartDataCallback} options={memoizedLineOptions} width={970} height={200}></LineChart>
           </div>
         </CardContainer>}
       </div>
@@ -125,11 +117,11 @@ const Overview = () => {
 
         {!isLoading && <CardContainer style={{ width: '500px', height: '250px', overflow: 'auto' }}>
           <div className={`${styles["card__content--chart"]}`}>
-            <h3>Referrals</h3>
+            <h3>{t('overview.referralsTitle')}</h3>
 
             <div className={`${styles["card__content"]}`}>
               <TableComponent rows={overviewDataUtil.getReferralsTableRows(referrals)}
-                headers={memoizedReferralsTableHeaders} minWidth={450} />
+                headers={referrentTableHeaders} minWidth={450} />
             </div>
           </div>
         </CardContainer>}
@@ -141,11 +133,11 @@ const Overview = () => {
 
         {!isLoading && <CardContainer style={{ width: '500px', height: '250px', overflow: 'auto' }}>
           <div className={`${styles["card__content--chart"]}`}>
-            <h3>Page visits</h3>
+            <h3>{t('overview.pageVisitsTitle')}</h3>
 
             <div className={`${styles["card__content"]}`}>
               <TableComponent rows={mainUtil.getTableRows<IOverviewItem>(pages, 'value', false)}
-                headers={memoizedPageVisitsTableHeaders} minWidth={450} />
+                headers={pageVisitsTableHeaders} minWidth={450} />
             </div>
           </div>
         </CardContainer>}

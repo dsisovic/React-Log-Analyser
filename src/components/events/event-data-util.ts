@@ -97,7 +97,7 @@ export const transformEventList = (data: string | null) => {
   return [];
 }
 
-export const getDoughnutData = (data: IEventItem[]) => {
+export const getDoughnutData = (data: IEventItem[], labels: string[]) => {
   const userLogin = getPiePercentage(data, EventType.USER_LOGIN);
   const userLogout = getPiePercentage(data, EventType.USER_LOGOUT);
   const serviceStart = getPiePercentage(data, EventType.SERVICE_START);
@@ -105,7 +105,7 @@ export const getDoughnutData = (data: IEventItem[]) => {
   const malwareAttacks = getPiePercentage(data, EventType.MALWARE_ATTACK);
 
   return {
-    labels: ["User Login", "User Logout", "File Data Write", "Service Start", "Malware attack"],
+    labels,
     datasets: [
       {
         label: "",
@@ -120,7 +120,7 @@ export const getDoughnutData = (data: IEventItem[]) => {
   };
 }
 
-export const getLineData = (data: IEventItem[]) => {
+export const getLineData = (data: IEventItem[], label: string) => {
   const labels = mainUtil.getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -7);
 
   const chartData = labels.map(label => {
@@ -133,7 +133,7 @@ export const getLineData = (data: IEventItem[]) => {
     labels,
     datasets: [
       {
-        label: 'Number of events',
+        label,
         data: chartData, fill: false,
         backgroundColor: mainUtil.BLUE_COLOR,
         borderColor: mainUtil.LIGHT_BLUE_COLOR

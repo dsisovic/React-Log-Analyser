@@ -49,21 +49,21 @@ export const getNumberOfVisitors = (data: IOverviewVisitor[], userType: UserType
 
 export const getTotalNumberOfVisitors = (data: IOverviewVisitor[]) => data.length;
 
-export const getLineChartVisitorsData = (data: IOverviewVisitor[]) => {
+export const getLineChartVisitorsData = (data: IOverviewVisitor[], newVisitorsLabel: string, existingVisitorsLabel: string) => {
   const labels = mainUtil.getUniqueItemsFromTheRange<IOverviewVisitor>(data, 'datetime', -14);
 
   return {
     labels,
     datasets: [
       {
-        label: 'New Visitors',
+        label: newVisitorsLabel,
         data: getNumberOfVisitorsByDate(labels, data, UserType.NEW),
         fill: false,
         backgroundColor: mainUtil.BLUE_COLOR,
         borderColor: mainUtil.LIGHT_BLUE_COLOR
       },
       {
-        label: 'Returning Visitors',
+        label: existingVisitorsLabel,
         data: getNumberOfVisitorsByDate(labels, data, UserType.EXISTING),
         fill: false,
         backgroundColor: mainUtil.PURPLE_COLOR,

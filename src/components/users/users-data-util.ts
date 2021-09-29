@@ -63,10 +63,10 @@ export const getVisitsDurationData = (data: IUserLog[]) => {
   const fiveTo15MinutesPercent = getPiePercentage(fiveTo15Minutes, sumOfValues);
 
   return {
-    labels: ["0 sec - 30 sec", "30 sec - 2 min", "2 min - 5 min", "5 min - 15 min"],
+    labels: ["0 s - 30 s", "30 s - 2 m", "2 m - 5 m", "5 m - 15 m"],
     datasets: [
       {
-        label: "Users by devices",
+        label: "",
         data: [zeroTo30SecondsPercent, thirtyTo2MinutesPercent, twoToTo5MinutesPercent, fiveTo15MinutesPercent],
         backgroundColor: visitDurationColors,
         borderWidth: 0

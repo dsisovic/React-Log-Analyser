@@ -1,6 +1,5 @@
 import React from 'react';
 import CardContainer from "../card/Card";
-import styles from './StatsCard.module.scss';
 import { IEventCardProps } from "./ts/event-card-props.model";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";

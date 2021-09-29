@@ -1,3 +1,5 @@
+import { TFunction } from "i18next";
+import { Language } from "../ts/enums/language.enum";
 import { TableAlignment } from "../ui-components/table/ts/enums/table-alignment.enum";
 
 export const APP_LOAD_DELAY = 2000;
@@ -11,6 +13,14 @@ export const PURPLE_COLOR = '#E18CF9';
 export const BLUE_BACKGROUND = '#003CFF';
 export const LIGHT_BLUE_COLOR = 'rgba(0, 60, 255, 0.2)';
 export const LIGHT_PURPLE_COLOR = 'rgba(255, 140, 249, 0.2)';
+
+const getUniqueItems = <T>(data: T[], key: keyof T) => {
+  return data.reduce((accumulator, dataItem) => {
+    const valueToCompare = dataItem[key] as unknown as string;
+
+    return accumulator.includes(valueToCompare) ? accumulator : [...accumulator, valueToCompare];
+  }, [] as string[]);
+}
 
 export const unitSeparator = (tickValue: string | number) => {
   const tickValueNumber = Number.parseFloat(tickValue.toString());
@@ -44,25 +54,42 @@ export const getUniqueItemsFromTheRange = <T>(data: T[], key: keyof T, sliceOffs
     .slice(sliceOffset);
 }
 
-export const getTableRows = <T>(data: T[], key: keyof T, showImage: boolean) => {
+export const getTableRows = <T>(data: T[], key: keyof T, showImage: boolean, translationObject?: TFunction, translationKey?: string) => {
   const uniqueItems = getUniqueItems<T>(data, key);
 
   return uniqueItems.map(uniqueItem => {
     const numberOfVisits = data.filter(dataItem => dataItem[key] as unknown === uniqueItem).length;
+    const firstValue = !translationObject ? uniqueItem : translationObject(`${translationKey}.${uniqueItem.toLowerCase()}`);
 
     return {
       data: [
-        { 'row-0': uniqueItem, alignment: TableAlignment.LEFT, showImage },
+        { 'row-0': firstValue, imageValue: uniqueItem, alignment: TableAlignment.LEFT, showImage },
         { 'row-1': numberOfVisits, alignment: TableAlignment.RIGHT }
       ]
     };
   });
 }
 
-const getUniqueItems = <T>(data: T[], key: keyof T) => {
-  return data.reduce((accumulator, dataItem) => {
-    const valueToCompare = dataItem[key] as unknown as string;
+export const getStoredLanguage = () => {
+  try {
+      const storedLanguage = localStorage.getItem('loggyLanguage') as Language | null;
 
-    return accumulator.includes(valueToCompare) ? accumulator : [...accumulator, valueToCompare];
-  }, [] as string[]);
+      if (storedLanguage === Language.ENGLISH ||  storedLanguage === Language.SERBIAN) {
+          return storedLanguage as Language;
+      }
+
+      return Language.SERBIAN;
+  } catch {
+      return Language.SERBIAN;
+  }
+}
+
+export const getTableHeaders = (titles: string[], numberOfHeaders: number) => {
+  return Array
+  .from({length: numberOfHeaders})
+  .map((_, index) => {
+    const alignment = index !== 0 ? TableAlignment.RIGHT : TableAlignment.LEFT;
+
+    return { value: titles[index], alignment }
+  });
 }

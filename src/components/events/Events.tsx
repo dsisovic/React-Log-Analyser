@@ -1,4 +1,5 @@
 import { Skeleton } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { loadEvents } from '../../store/EventIndex';
 import TrafficIcon from '@mui/icons-material/Traffic';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,22 +18,18 @@ import { IEventStore } from '../../store/ts/models/event-store.model';
 import LoaderStack from '../../ui-components/loader-stack/LoaderStack';
 import ModuleModal from '../../ui-components/module-modal/ModuleModal';
 import { dougnutOptions, getLineOptions } from '../../ui-components/chart/util/chart-util';
-import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as eventDataUtility from './event-data-util';
 import * as mainUtil from '../../utils/main-util';
 
 const cardWidth = "280px";
 const cardHeight = "104px";
 
-const attackHeaders = [
-  { value: 'Attacker', alignment: TableAlignment.LEFT },
-  { value: 'Number of attacks', alignment: TableAlignment.RIGHT }
-];
-
 const Events = () => {
+  const { t } = useTranslation('index');
   const dispatch = useDispatch();
 
-  const memoizedTableHeaders = useMemo(() => attackHeaders, []);
+  const attackHeaders = mainUtil.getTableHeaders([t('events.attacker'), t('events.numberOfAttackers')], 2);
+
   const memoizedLineOptions = useMemo(() => getLineOptions(), []);
   const memoizedDougnutOptions = useMemo(() => dougnutOptions, []);
   const memoizedBarOptions = useMemo(() => getLineOptions('B'), []);
@@ -50,6 +47,9 @@ const Events = () => {
     showUpIcon: showAttacksUpIcon, totalPercentage: totalAttacksPercentage
   } = eventDataUtility.getTotalEventsPercentage(data, EventType.MALWARE_ATTACK);
 
+  const dougnutChartData = eventDataUtility.getDoughnutData(data, 
+    [t('events.userLogin'), t('events.userLogout'), t('events.fileDataWrite'), t('events.serviceStart'), t('events.malwareAttack')
+  ]);
   const { showBandwidthUpIcon, totalBandwidthPercentage } = eventDataUtility.getTotalBandwidthPercentage(bandwidthData);
 
   const totalPercentage = useCallback(() => eventDataUtility.getTotalEventsForTheWeek(data), [data]);
@@ -72,7 +72,7 @@ const Events = () => {
           !isLoading &&
           <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<ManageSearchIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
             percentageCallback={totalPercentage} showUpIcon={showEventsUpIcon} totalEventsPercentage={totalEventsPercentage} showPercentageIcon={true}
-            label="Total events this week"
+            label={t('events.card1')}
           />
         }
 
@@ -87,7 +87,7 @@ const Events = () => {
           !isLoading &&
           <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<SecurityIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
             percentageCallback={numberOfAttacks} showUpIcon={showAttacksUpIcon} totalEventsPercentage={totalAttacksPercentage} showPercentageIcon={true}
-            label="Blocked attacks this week"
+            label={t('events.card2')}
           />
         }
 
@@ -101,7 +101,7 @@ const Events = () => {
         {!isLoading &&
           <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<TrafficIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
             percentageCallback={bandwidth} showUpIcon={showBandwidthUpIcon} totalEventsPercentage={totalBandwidthPercentage} showPercentageIcon={true}
-            label=" Data exchanged this week"
+            label={t('events.card3')}
           />}
       </div>
 
@@ -114,12 +114,12 @@ const Events = () => {
 
         {
           !isLoading && <CardContainer
-            style={{ width: '700px', height: '300px' }}
+            style={{ width: '700px', height: '330px' }}
           >
             <div className={`${overviewStyles["card__content--chart"]}`}>
-              <h3>All Events - last 7 days</h3>
+              <h3>{t('events.allEventsTitle')}</h3>
 
-              <LineChart data={eventDataUtility.getLineData(data)} options={memoizedLineOptions} width={650} height={230}></LineChart>
+              <LineChart data={eventDataUtility.getLineData(data, t('events.numberOfEventsTitle'))} options={memoizedLineOptions} width={650} height={230}></LineChart>
             </div>
           </CardContainer>
         }
@@ -133,12 +133,12 @@ const Events = () => {
         {
           !isLoading &&
           <CardContainer
-            style={{ width: '400px', height: '300px' }}
+            style={{ width: '400px', height: '330px' }}
           >
             <div className={`${overviewStyles["card__content--chart"]}`}>
-              <h3>All events by event type</h3>
+              <h3>{t('events.allEventsTypeTitle')}</h3>
 
-              <DoughnutChart data={eventDataUtility.getDoughnutData(data)} options={memoizedDougnutOptions} width={350} height={250}
+              <DoughnutChart data={dougnutChartData} options={memoizedDougnutOptions} width={380} height={250}
               >
               </DoughnutChart>
             </div>
@@ -157,10 +157,10 @@ const Events = () => {
         {!isLoading &&
           <CardContainer style={{ width: '500px', height: '260px', overflow: 'auto' }}>
             <div className={`${overviewStyles["card__content--chart"]}`}>
-              <h3>Attackers</h3>
+              <h3>{t('events.attackers')}</h3>
 
               <div className={`${overviewStyles["card__content"]}`}>
-                <TableComponent rows={eventDataUtility.getAttackTableRows(attackData)} headers={memoizedTableHeaders} minWidth={450}></TableComponent>
+                <TableComponent rows={eventDataUtility.getAttackTableRows(attackData)} headers={attackHeaders} minWidth={450}></TableComponent>
               </div>
             </div>
           </CardContainer>}
@@ -175,7 +175,7 @@ const Events = () => {
           style={{ width: '600px', height: '260px' }}
         >
           <div className={`${overviewStyles["card__content--chart"]}`}>
-            <h3>Total traffic by ports</h3>
+            <h3>{t('events.trafficTitle')}</h3>
 
             <BarChart data={eventDataUtility.getTrafficChartData(bandwidthData)} options={memoizedBarOptions} width={560} height={190}></BarChart>
           </div>

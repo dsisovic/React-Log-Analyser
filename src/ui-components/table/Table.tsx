@@ -27,8 +27,8 @@ const TableComponent = (props: ITableProps) => {
                                     <TableCell key={dataIndex} align={dataItem.alignment}>
                                         <div className={dataItem?.showImage ? tableStyles['cell__image'] : ''} >
                                             {dataItem.showImage &&
-                                                <img src={require(`../../images/flags/${dataItem[`row-${dataIndex}`].toLowerCase()}.png`).default}
-                                                    alt={dataItem[`row-${dataIndex}`]} />}
+                                                <img src={require(`../../images/flags/${dataItem.imageValue.toLowerCase()}.png`).default}
+                                                    alt={dataItem.imageValue} />}
 
                                             {dataItem[`row-${dataIndex}`]}
                                         </div>
