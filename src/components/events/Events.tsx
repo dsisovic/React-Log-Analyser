@@ -1,4 +1,4 @@
-import Modal from '../../ui-components/modal/Modal';
+import { Skeleton } from '@mui/material';
 import { loadEvents } from '../../store/EventIndex';
 import TrafficIcon from '@mui/icons-material/Traffic';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,13 +9,13 @@ import BarChart from "../../ui-components/chart/BarChart";
 import CardContainer from "../../ui-components/card/Card";
 import LineChart from "../../ui-components/chart/LineChart";
 import TableComponent from "../../ui-components/table/Table";
+import overviewStyles from "../overview/Overview.module.scss";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import StatsCard from '../../ui-components/stats-card/StartsCard';
+import StatsCard from '../../ui-components/stats-card/StatsCard';
 import DoughnutChart from "../../ui-components/chart/DoughnutChart";
-import statisticsStyles from "../statistics/Statistics.module.scss";
 import { IEventStore } from '../../store/ts/models/event-store.model';
 import LoaderStack from '../../ui-components/loader-stack/LoaderStack';
-import { Alert, AlertTitle, CircularProgress, Skeleton } from '@mui/material';
+import ModuleModal from '../../ui-components/module-modal/ModuleModal';
 import { dougnutOptions, getLineOptions } from '../../ui-components/chart/util/chart-util';
 import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as eventDataUtility from './event-data-util';
@@ -58,18 +58,9 @@ const Events = () => {
 
   return (
     <>
-      <Modal show={isLoading} color={mainUtil.BLUE_COLOR}>
-        <CircularProgress color="inherit" />
-      </Modal>
+      <ModuleModal isLoading={isLoading} showErrorModal={showErrorModal}/>
 
-      <Modal show={showErrorModal}>
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
-          Problem occured while fetching data. Please check internet connection!
-        </Alert>
-      </Modal>
-
-      <div className={statisticsStyles.card}>
+      <div className={overviewStyles.card}>
         {
           isLoading && <LoaderStack>
             <Skeleton variant="circular" width={70} height={70} />
@@ -114,7 +105,7 @@ const Events = () => {
           />}
       </div>
 
-      <div className={statisticsStyles.card}>
+      <div className={overviewStyles.card}>
         {
           isLoading && <LoaderStack>
             <Skeleton variant="rectangular" width={700} height={300} />
@@ -125,7 +116,7 @@ const Events = () => {
           !isLoading && <CardContainer
             style={{ width: '700px', height: '300px' }}
           >
-            <div className={`${statisticsStyles["card__content--chart"]}`}>
+            <div className={`${overviewStyles["card__content--chart"]}`}>
               <h3>All Events - last 7 days</h3>
 
               <LineChart data={eventDataUtility.getLineData(data)} options={memoizedLineOptions} width={650} height={230}></LineChart>
@@ -144,7 +135,7 @@ const Events = () => {
           <CardContainer
             style={{ width: '400px', height: '300px' }}
           >
-            <div className={`${statisticsStyles["card__content--chart"]}`}>
+            <div className={`${overviewStyles["card__content--chart"]}`}>
               <h3>All events by event type</h3>
 
               <DoughnutChart data={eventDataUtility.getDoughnutData(data)} options={memoizedDougnutOptions} width={350} height={250}
@@ -155,7 +146,7 @@ const Events = () => {
         }
       </div>
 
-      <div className={statisticsStyles.card}>
+      <div className={overviewStyles.card}>
 
         {
           isLoading && <LoaderStack>
@@ -165,10 +156,10 @@ const Events = () => {
 
         {!isLoading &&
           <CardContainer style={{ width: '500px', height: '260px', overflow: 'auto' }}>
-            <div className={`${statisticsStyles["card__content--chart"]}`}>
+            <div className={`${overviewStyles["card__content--chart"]}`}>
               <h3>Attackers</h3>
 
-              <div className={`${statisticsStyles["card__content"]}`}>
+              <div className={`${overviewStyles["card__content"]}`}>
                 <TableComponent rows={eventDataUtility.getAttackTableRows(attackData)} headers={memoizedTableHeaders} minWidth={450}></TableComponent>
               </div>
             </div>
@@ -183,7 +174,7 @@ const Events = () => {
         {!isLoading && <CardContainer
           style={{ width: '600px', height: '260px' }}
         >
-          <div className={`${statisticsStyles["card__content--chart"]}`}>
+          <div className={`${overviewStyles["card__content--chart"]}`}>
             <h3>Total traffic by ports</h3>
 
             <BarChart data={eventDataUtility.getTrafficChartData(bandwidthData)} options={memoizedBarOptions} width={560} height={190}></BarChart>

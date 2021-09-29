@@ -13,25 +13,6 @@ const getPiePercentage = (data: IEventItem[], typeValue: EventType) => {
   return +((data.filter(dataItem => dataItem.value === typeValue).length / data.length) * 100).toFixed(1);
 }
 
-const getUniqueItemsFromTheRange = <T>(data: T[], key: keyof T, sliceOffset: number) => {
-  return Array
-    .from(new Set(data.map(dataItem => (dataItem[key] as unknown as string).split(' ')[0])))
-    .slice(sliceOffset);
-}
-
-const getNumberOfEventsByDate = (labels: string[], data: IEventItem[], eventType?: EventType) => {
-  return labels.reduce((accumulator, label) => {
-    const matchingLabelEvents = data.filter(dataItem => {
-      const { datetime, value } = dataItem;
-      const typeMatches = !eventType ? true : value === eventType;
-
-      return typeMatches && datetime.startsWith(label);
-    });
-
-    return accumulator + matchingLabelEvents.length;
-  }, 0);
-}
-
 const getBytesOfEventsByDate = (labels: string[], data: IEventBandwidthItem[]) => {
   return labels.reduce((accumulator, label) => {
     const totalBytes = data.reduce((bdwAcc, item) => item.datetime.startsWith(label) ? bdwAcc + +item.bandwidth : bdwAcc, 0);
@@ -41,7 +22,7 @@ const getBytesOfEventsByDate = (labels: string[], data: IEventBandwidthItem[]) =
 }
 
 export const getAttackTableRows = (data: IEventAttackItem[]) => {
-  const uniqueAttackers = getUniqueItemsFromTheRange<IEventAttackItem>(data, 'value', 0);
+  const uniqueAttackers = mainUtil.getUniqueItemsFromTheRange<IEventAttackItem>(data, 'value', 0);
 
   return uniqueAttackers.map(attackerIpAddress => {
     const numberOfAttacks = data.filter(dataItem => dataItem.value === attackerIpAddress).length;
@@ -56,12 +37,12 @@ export const getAttackTableRows = (data: IEventAttackItem[]) => {
 }
 
 export const getTotalEventsPercentage = (data: IEventItem[], eventType?: EventType) => {
-  const labels = getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -14);
+  const labels = mainUtil.getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -14);
   const last7DayLabels = labels.slice(-7);
   const previous7DayLabels = labels.slice(0, 7);
 
-  const last7DaysEvents = getNumberOfEventsByDate(last7DayLabels, data, eventType);
-  const previous7DaysEvents = getNumberOfEventsByDate(previous7DayLabels, data, eventType);
+  const last7DaysEvents = mainUtil.getNumberOfEventsByDate(last7DayLabels, data, eventType);
+  const previous7DaysEvents = mainUtil.getNumberOfEventsByDate(previous7DayLabels, data, eventType);
 
   const showUpIcon = last7DaysEvents > previous7DaysEvents;
   const totalPercentage = ((last7DaysEvents / previous7DaysEvents)).toFixed(1);
@@ -70,7 +51,7 @@ export const getTotalEventsPercentage = (data: IEventItem[], eventType?: EventTy
 }
 
 export const getTotalBandwidthPercentage = (data: IEventBandwidthItem[]) => {
-  const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -14);
+  const labels = mainUtil.getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -14);
   const last7DayLabels = labels.slice(-7);
   const previous7DayLabels = labels.slice(0, 7);
 
@@ -84,13 +65,13 @@ export const getTotalBandwidthPercentage = (data: IEventBandwidthItem[]) => {
 }
 
 export const getTotalEventsForTheWeek = (data: IEventItem[], eventType?: EventType) => {
-  const labels = getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -7);
+  const labels = mainUtil.getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -7);
 
-  return getNumberOfEventsByDate(labels, data, eventType);
+  return mainUtil.getNumberOfEventsByDate(labels, data, eventType);
 }
 
 export const getTotalDataTraffic = (data: IEventBandwidthItem[]) => {
-  const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -7);
+  const labels = mainUtil.getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'datetime', -7);
 
   const totalBytes = labels.reduce((accumulator, label) => {
     const sumOfLabelData = data.reduce((bdwAcc, item) => item.datetime.startsWith(label) ? bdwAcc + +item.bandwidth : bdwAcc, 0);
@@ -140,7 +121,7 @@ export const getDoughnutData = (data: IEventItem[]) => {
 }
 
 export const getLineData = (data: IEventItem[]) => {
-  const labels = getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -7);
+  const labels = mainUtil.getUniqueItemsFromTheRange<IEventItem>(data, 'datetime', -7);
 
   const chartData = labels.map(label => {
     const matchingLabelEvents = data.filter(dataItem => dataItem.datetime.startsWith(label));
@@ -153,8 +134,7 @@ export const getLineData = (data: IEventItem[]) => {
     datasets: [
       {
         label: 'Number of events',
-        data: chartData,
-        fill: false,
+        data: chartData, fill: false,
         backgroundColor: mainUtil.BLUE_COLOR,
         borderColor: mainUtil.LIGHT_BLUE_COLOR
       }
@@ -163,7 +143,7 @@ export const getLineData = (data: IEventItem[]) => {
 };
 
 export const getTrafficChartData = (data: IEventBandwidthItem[]) => {
-  const labels = getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'value', 0);
+  const labels = mainUtil.getUniqueItemsFromTheRange<IEventBandwidthItem>(data, 'value', 0);
 
   return {
     labels,

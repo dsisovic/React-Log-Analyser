@@ -1,20 +1,11 @@
 import { IUserLog } from "./ts/models/user-log.model";
 import { UserLogFileType } from "./ts/enums/user-log-file-type.enum";
 import { UserLogDeviceType } from "./ts/enums/user-log-device-type.enum";
-import { TableAlignment } from "../../ui-components/table/ts/enums/table-alignment.enum";
 import * as mainUtil from '../../utils/main-util';
 
 const visitDurationColors = [
   mainUtil.YELLOW_COLOR, mainUtil.BLUE_COLOR, mainUtil.RED_COLOR, mainUtil.PURPLE_COLOR
 ];
-
-const getUniqueItems = <T>(data: T[], key: keyof T) => {
-  return data.reduce((accumulator, dataItem) => {
-    const valueToCompare = dataItem[key] as unknown as string;
-
-    return accumulator.includes(valueToCompare) ? accumulator : [...accumulator, valueToCompare];
-  }, [] as string[]);
-}
 
 const getPiePercentage = (numberOfItems: number, totalNumberOfItems: number) => {
   return +((numberOfItems / totalNumberOfItems) * 100).toFixed(1);
@@ -96,19 +87,4 @@ export const transformUserLog = (data: string | null, isMainFile: boolean) => {
 
 export const getNumberOfDeviceTypes = (data: IUserLog[], deviceType: UserLogDeviceType) => {
   return data.reduce((accumulator, dataItem) => dataItem.deviceType === deviceType ? accumulator + 1 : accumulator, 0);
-}
-
-export const getTableRows = <T>(data: T[], key: keyof T, showImage: boolean) => {
-  const uniqueItems = getUniqueItems<T>(data, key);
-
-  return uniqueItems.map(uniqueItem => {
-    const numberOfVisits = data.filter(dataItem => dataItem[key] as unknown === uniqueItem).length;
-
-    return {
-      data: [
-        { 'row-0': uniqueItem, alignment: TableAlignment.LEFT, showImage },
-        { 'row-1': numberOfVisits, alignment: TableAlignment.RIGHT }
-      ]
-    };
-  });
 }
