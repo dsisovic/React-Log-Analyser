@@ -1,0 +1,41 @@
+{
+  "files": {
+    "static/js/0.21ef3a84.chunk.js": "/React-Log-Analyser/static/js/0.21ef3a84.chunk.js",
+    "static/js/0.21ef3a84.chunk.js.map": "/React-Log-Analyser/static/js/0.21ef3a84.chunk.js.map",
+    "main.css": "/React-Log-Analyser/static/css/main.48fb15df.chunk.css",
+    "main.js": "/React-Log-Analyser/static/js/main.17fabde9.chunk.js",
+    "main.js.map": "/React-Log-Analyser/static/js/main.17fabde9.chunk.js.map",
+    "runtime-main.js": "/React-Log-Analyser/static/js/runtime-main.2628afcd.js",
+    "runtime-main.js.map": "/React-Log-Analyser/static/js/runtime-main.2628afcd.js.map",
+    "static/css/3.c7e8709f.chunk.css": "/React-Log-Analyser/static/css/3.c7e8709f.chunk.css",
+    "static/js/3.cf261cbf.chunk.js": "/React-Log-Analyser/static/js/3.cf261cbf.chunk.js",
+    "static/js/3.cf261cbf.chunk.js.map": "/React-Log-Analyser/static/js/3.cf261cbf.chunk.js.map",
+    "static/css/4.4aeb9836.chunk.css": "/React-Log-Analyser/static/css/4.4aeb9836.chunk.css",
+    "static/js/4.a7b6878d.chunk.js": "/React-Log-Analyser/static/js/4.a7b6878d.chunk.js",
+    "static/js/4.a7b6878d.chunk.js.map": "/React-Log-Analyser/static/js/4.a7b6878d.chunk.js.map",
+    "static/css/5.4aeb9836.chunk.css": "/React-Log-Analyser/static/css/5.4aeb9836.chunk.css",
+    "static/js/5.59c37e71.chunk.js": "/React-Log-Analyser/static/js/5.59c37e71.chunk.js",
+    "static/js/5.59c37e71.chunk.js.map": "/React-Log-Analyser/static/js/5.59c37e71.chunk.js.map",
+    "static/css/6.d227706d.chunk.css": "/React-Log-Analyser/static/css/6.d227706d.chunk.css",
+    "static/js/6.e810f3e5.chunk.js": "/React-Log-Analyser/static/js/6.e810f3e5.chunk.js",
+    "static/js/6.e810f3e5.chunk.js.map": "/React-Log-Analyser/static/js/6.e810f3e5.chunk.js.map",
+    "static/js/7.e21152d2.chunk.js": "/React-Log-Analyser/static/js/7.e21152d2.chunk.js",
+    "static/js/7.e21152d2.chunk.js.map": "/React-Log-Analyser/static/js/7.e21152d2.chunk.js.map",
+    "index.html": "/React-Log-Analyser/index.html",
+    "static/css/3.c7e8709f.chunk.css.map": "/React-Log-Analyser/static/css/3.c7e8709f.chunk.css.map",
+    "static/css/4.4aeb9836.chunk.css.map": "/React-Log-Analyser/static/css/4.4aeb9836.chunk.css.map",
+    "static/css/5.4aeb9836.chunk.css.map": "/React-Log-Analyser/static/css/5.4aeb9836.chunk.css.map",
+    "static/css/6.d227706d.chunk.css.map": "/React-Log-Analyser/static/css/6.d227706d.chunk.css.map",
+    "static/css/main.48fb15df.chunk.css.map": "/React-Log-Analyser/static/css/main.48fb15df.chunk.css.map",
+    "static/js/0.21ef3a84.chunk.js.LICENSE.txt": "/React-Log-Analyser/static/js/0.21ef3a84.chunk.js.LICENSE.txt",
+    "static/js/3.cf261cbf.chunk.js.LICENSE.txt": "/React-Log-Analyser/static/js/3.cf261cbf.chunk.js.LICENSE.txt",
+    "static/media/latin.css": "/React-Log-Analyser/static/media/nunito-sans-latin-900-normal.a33ed987.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2628afcd.js",
+    "static/css/3.c7e8709f.chunk.css",
+    "static/js/3.cf261cbf.chunk.js",
+    "static/css/main.48fb15df.chunk.css",
+    "static/js/main.17fabde9.chunk.js"
+  ]
+}
