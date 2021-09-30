@@ -12,6 +12,8 @@ import sidebarStyles from './components/sidebar/Sidebar.module.scss';
 import { Route, Redirect, Switch, useLocation } from "react-router";
 import * as mainUtil from './utils/main-util';
 
+let isScreenSizeChecked = false;
+
 const UsersLazyComponent = React.lazy(() => import('./components/users/Users'));
 const EventsLazyComponent = React.lazy(() => import('./components/events/Events'));
 const OverviewLazyComponent = React.lazy(() => import('./components/overview/Overview'));
@@ -31,7 +33,11 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    setSidebaredOpen(!biggerThan1440);
+    if (isScreenSizeChecked) {
+      setSidebaredOpen(!biggerThan1440);
+    }
+    
+    isScreenSizeChecked = true;
   }, [biggerThan1440]);
 
   return (
