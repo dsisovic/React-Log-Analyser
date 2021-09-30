@@ -27,8 +27,12 @@ const App = () => {
   }
 
   useEffect(() => {
-    setSidebaredOpen(false || !biggerThan1440);
-  }, [location.pathname, biggerThan1440]);
+    setSidebaredOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    setSidebaredOpen(!biggerThan1440);
+  }, [biggerThan1440]);
 
   return (
     <>

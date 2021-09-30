@@ -35,7 +35,7 @@ const Events = () => {
   const memoizedBarOptions = useMemo(() => getLineOptions('B'), []);
 
   useEffect(() => {
-    dispatch(loadEvents()); 
+    dispatch(loadEvents());
   }, [dispatch]);
 
   const { isLoading, data, attackData, bandwidthData, showErrorModal } = useSelector((state: IEventStore) => state.events);
@@ -47,18 +47,19 @@ const Events = () => {
     showUpIcon: showAttacksUpIcon, totalPercentage: totalAttacksPercentage
   } = eventDataUtility.getTotalEventsPercentage(data, EventType.MALWARE_ATTACK);
 
-  const dougnutChartData = eventDataUtility.getDoughnutData(data, 
-    [t('events.userLogin'), t('events.userLogout'), t('events.fileDataWrite'), t('events.serviceStart'), t('events.malwareAttack')
-  ]);
+  const dougnutChartData = eventDataUtility.getDoughnutData(data,
+    [t('events.userLogin'), t('events.userLogout'),
+    t('events.fileDataWrite'), t('events.serviceStart'), t('events.malwareAttack')
+    ]);
   const { showBandwidthUpIcon, totalBandwidthPercentage } = eventDataUtility.getTotalBandwidthPercentage(bandwidthData);
 
-  const totalPercentage = useCallback(() => eventDataUtility.getTotalEventsForTheWeek(data), [data]);
-  const bandwidth = useCallback(() => eventDataUtility.getTotalDataTraffic(bandwidthData), [bandwidthData]);
-  const numberOfAttacks = useCallback(() => eventDataUtility.getTotalEventsForTheWeek(data, EventType.MALWARE_ATTACK), [data]);
+  const totalPercentageCallback = useCallback(() => eventDataUtility.getTotalEventsForTheWeek(data), [data]);
+  const bandwidthCallback = useCallback(() => eventDataUtility.getTotalDataTraffic(bandwidthData), [bandwidthData]);
+  const numberOfAttacksCallback = useCallback(() => eventDataUtility.getTotalEventsForTheWeek(data, EventType.MALWARE_ATTACK), [data]);
 
   return (
     <>
-      <ModuleModal isLoading={isLoading} showErrorModal={showErrorModal}/>
+      <ModuleModal isLoading={isLoading} showErrorModal={showErrorModal} />
 
       <div className={overviewStyles.card}>
         {
@@ -71,7 +72,7 @@ const Events = () => {
         {
           !isLoading &&
           <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<ManageSearchIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
-            percentageCallback={totalPercentage} showUpIcon={showEventsUpIcon} totalEventsPercentage={totalEventsPercentage} showPercentageIcon={true}
+            percentageCallback={totalPercentageCallback} showUpIcon={showEventsUpIcon} totalEventsPercentage={totalEventsPercentage} showPercentageIcon={true}
             label={t('events.card1')}
           />
         }
@@ -86,7 +87,7 @@ const Events = () => {
         {
           !isLoading &&
           <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<SecurityIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
-            percentageCallback={numberOfAttacks} showUpIcon={showAttacksUpIcon} totalEventsPercentage={totalAttacksPercentage} showPercentageIcon={true}
+            percentageCallback={numberOfAttacksCallback} showUpIcon={showAttacksUpIcon} totalEventsPercentage={totalAttacksPercentage} showPercentageIcon={true}
             label={t('events.card2')}
           />
         }
@@ -100,7 +101,7 @@ const Events = () => {
 
         {!isLoading &&
           <StatsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<TrafficIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
-            percentageCallback={bandwidth} showUpIcon={showBandwidthUpIcon} totalEventsPercentage={totalBandwidthPercentage} showPercentageIcon={true}
+            percentageCallback={bandwidthCallback} showUpIcon={showBandwidthUpIcon} totalEventsPercentage={totalBandwidthPercentage} showPercentageIcon={true}
             label={t('events.card3')}
           />}
       </div>
@@ -108,7 +109,7 @@ const Events = () => {
       <div className={overviewStyles.card}>
         {
           isLoading && <LoaderStack>
-            <Skeleton variant="rectangular" width={700} height={300}  />
+            <Skeleton variant="rectangular" width={700} height={300} />
           </LoaderStack>
         }
 

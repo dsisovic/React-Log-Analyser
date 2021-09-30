@@ -40,9 +40,9 @@ const Users = () => {
   const keywordTableHeaders = mainUtil.getTableHeaders([t('users.keywordHeader'), t('users.typed')], 2);
   const fileTypeTableHeaders = mainUtil.getTableHeaders([t('users.file'), t('users.downloaded')], 2);
 
-  const tabletUsers = useCallback(() => userDataUtil.getNumberOfDeviceTypes(data, UserLogDeviceType.TABLET), [data]);
-  const pcUsers = useCallback(() => userDataUtil.getNumberOfDeviceTypes(data, UserLogDeviceType.PERSONAL_COMPUTER), [data]);
-  const mobilePhoneUsers = useCallback(() => userDataUtil.getNumberOfDeviceTypes(data, UserLogDeviceType.MOBILE_PHONE), [data]);
+  const tabletUsersCallback = useCallback(() => userDataUtil.getNumberOfDeviceTypes(data, UserLogDeviceType.TABLET), [data]);
+  const pcUsersCallback = useCallback(() => userDataUtil.getNumberOfDeviceTypes(data, UserLogDeviceType.PERSONAL_COMPUTER), [data]);
+  const mobilePhoneUsersCallback = useCallback(() => userDataUtil.getNumberOfDeviceTypes(data, UserLogDeviceType.MOBILE_PHONE), [data]);
 
   return (
     <>
@@ -57,7 +57,7 @@ const Users = () => {
         } 
 
         {!isLoading && <StartsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<PhoneAndroidIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
-          percentageCallback={mobilePhoneUsers} totalEventsPercentage={''} showPercentageIcon={false}
+          percentageCallback={mobilePhoneUsersCallback} totalEventsPercentage={''} showPercentageIcon={false}
           label={t('users.card1')}
         /> 
         }
@@ -69,7 +69,7 @@ const Users = () => {
         }
 
         {!isLoading && <StartsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<DesktopMacIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
-          percentageCallback={pcUsers} totalEventsPercentage={''} showPercentageIcon={false}
+          percentageCallback={pcUsersCallback} totalEventsPercentage={''} showPercentageIcon={false}
           label={t('users.card2')}
         />
         }
@@ -81,7 +81,7 @@ const Users = () => {
         }
 
         {!isLoading && <StartsCard cardWidth={cardWidth} cardHeight={cardHeight} icon={<TabletIcon sx={{ fontSize: 35, color: mainUtil.BLUE_BACKGROUND }} />}
-          percentageCallback={tabletUsers} totalEventsPercentage={''} showPercentageIcon={false}
+          percentageCallback={tabletUsersCallback} totalEventsPercentage={''} showPercentageIcon={false}
           label={t('users.card3')}
         />
         }
