@@ -1,4 +1,8 @@
 {
+    "main": {
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu"
+    },
     "sidebar": {
         "title": "Language",
         "link1": "Overview",

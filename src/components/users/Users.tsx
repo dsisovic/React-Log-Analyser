@@ -110,11 +110,11 @@ const Users = () => {
         </LoaderStack>
         }
 
-        {!isLoading && <CardContainer style={{ width: '400px', height: '300px' }}>
+        {!isLoading && <CardContainer style={{ width: '400px', height: '300px', overflow: 'auto' }}>
           <div className={`${overviewStyles["card__content--chart"]}`}>
             <h3>{t('users.visits')}</h3>
 
-            <PieChart data={userDataUtil.getVisitsDurationData(data)} options={memoizedDougnutOptions} width={350} height={240}
+            <PieChart data={userDataUtil.getVisitsDurationData(data)} options={memoizedDougnutOptions} width={350} height={230}
             >
             </PieChart>
           </div>
@@ -127,7 +127,7 @@ const Users = () => {
         </LoaderStack>
         }
 
-        {!isLoading && <CardContainer style={{ width: '500px', height: '280px', overflow: 'auto' }}>
+        {!isLoading && <CardContainer style={{ width: '500px', minHeight: '290px', maxHeight: '38vh', overflow: 'auto' }}>
           <div className={`${overviewStyles["card__content--chart"]}`}>
             <h3>{t('users.keyword')}</h3>
 
@@ -143,7 +143,7 @@ const Users = () => {
         </LoaderStack>
         }
 
-        {!isLoading && <CardContainer style={{ width: '500px', height: '280px', overflow: 'auto' }}>
+        {!isLoading && <CardContainer style={{ width: '500px',minHeight: '290px', maxHeight: '38vh', overflow: 'auto' }}>
           <div className={`${overviewStyles["card__content--chart"]}`}>
             <h3>{t('users.fileType')}</h3>
 

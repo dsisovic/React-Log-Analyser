@@ -3,13 +3,15 @@
 .card {
   gap: 1em;
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 1em;
   align-items: center;
+  justify-content: center;
 
   &__content {
+    gap: 1em;
     display: flex;
     align-items: center;
-    gap: 1em;
 
     &--subheader {
       display: flex;
@@ -88,13 +90,13 @@
         line-height: 135%;
         letter-spacing: 0.01em;
         color: #1d1929;
-        margin: 0.5em 0.5em 0 0;
       }
     }
   }
 
   &__icon {
-    width: 70px;
+    width: 100%;
+    max-width: 70px;
     height: 70px;
     display: flex;
     border-radius: 50%;
@@ -111,6 +113,23 @@
 
     &--comment {
       background: #fbf1fe;
+    }
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .card { 
+    margin: 1em;
+    padding: 1em 0;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .card { 
+    &__icon {
+      max-width: 50px;
+      height: 50px;
     }
   }
 }

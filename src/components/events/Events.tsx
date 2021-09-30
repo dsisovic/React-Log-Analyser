@@ -108,13 +108,13 @@ const Events = () => {
       <div className={overviewStyles.card}>
         {
           isLoading && <LoaderStack>
-            <Skeleton variant="rectangular" width={700} height={300} />
+            <Skeleton variant="rectangular" width={700} height={300}  />
           </LoaderStack>
         }
 
         {
           !isLoading && <CardContainer
-            style={{ width: '700px', height: '330px' }}
+            style={{ width: '700px', overflow: 'auto' }}
           >
             <div className={`${overviewStyles["card__content--chart"]}`}>
               <h3>{t('events.allEventsTitle')}</h3>
@@ -133,12 +133,12 @@ const Events = () => {
         {
           !isLoading &&
           <CardContainer
-            style={{ width: '400px', height: '330px' }}
+            style={{ width: '400px', overflow: 'auto' }}
           >
             <div className={`${overviewStyles["card__content--chart"]}`}>
               <h3>{t('events.allEventsTypeTitle')}</h3>
 
-              <DoughnutChart data={dougnutChartData} options={memoizedDougnutOptions} width={380} height={250}
+              <DoughnutChart data={dougnutChartData} options={memoizedDougnutOptions} width={380} height={240}
               >
               </DoughnutChart>
             </div>
@@ -155,7 +155,7 @@ const Events = () => {
         }
 
         {!isLoading &&
-          <CardContainer style={{ width: '500px', height: '260px', overflow: 'auto' }}>
+          <CardContainer style={{ width: '500px', minHeight: '260px', maxHeight: '34vh', overflow: 'auto' }}>
             <div className={`${overviewStyles["card__content--chart"]}`}>
               <h3>{t('events.attackers')}</h3>
 
@@ -172,7 +172,7 @@ const Events = () => {
         }
 
         {!isLoading && <CardContainer
-          style={{ width: '600px', height: '260px' }}
+          style={{ width: '600px', overflow: 'auto' }}
         >
           <div className={`${overviewStyles["card__content--chart"]}`}>
             <h3>{t('events.trafficTitle')}</h3>

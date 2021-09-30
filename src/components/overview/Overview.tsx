@@ -94,16 +94,16 @@ const Overview = () => {
           <Skeleton variant="rectangular" width={1015} height={336} />
         </LoaderStack>
         }
-
+  
         {!isLoading && <CardContainer
-          style={{ width: '1015px', height: '336px' }}
+          style={{ maxWidth: '1015px', width: '100%', overflow: 'auto' }}
         >
           <div className={`${styles["card__content--chart"]}`}>
             <h3>{t('overview.chartTitle')}</h3>
-
+          
             <h2 className={`${styles['card__content--chart-subheader']}`}>{totalNumberOfVisitors}</h2>
 
-            <LineChart data={chartDataCallback} options={memoizedLineOptions} width={970} height={200}></LineChart>
+            <LineChart data={chartDataCallback} options={memoizedLineOptions} width={970} height={230}></LineChart>
           </div>
         </CardContainer>}
       </div>
@@ -115,7 +115,7 @@ const Overview = () => {
         </LoaderStack>
         }
 
-        {!isLoading && <CardContainer style={{ width: '500px', height: '250px', overflow: 'auto' }}>
+        {!isLoading && <CardContainer style={{ width: '500px', maxHeight: '34vh', overflow: 'auto' }}>
           <div className={`${styles["card__content--chart"]}`}>
             <h3>{t('overview.referralsTitle')}</h3>
 
@@ -131,7 +131,7 @@ const Overview = () => {
         </LoaderStack>
         }
 
-        {!isLoading && <CardContainer style={{ width: '500px', height: '250px', overflow: 'auto' }}>
+        {!isLoading && <CardContainer style={{ width: '500px', maxHeight: '34vh', overflow: 'auto' }}>
           <div className={`${styles["card__content--chart"]}`}>
             <h3>{t('overview.pageVisitsTitle')}</h3>
 

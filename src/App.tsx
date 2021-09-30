@@ -1,10 +1,15 @@
 import "./App.scss";
-import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import Modal from "./ui-components/modal/Modal";
-import { CircularProgress } from "@mui/material";
+import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from "./components/sidebar/Sidebar";
-import { Route, Redirect, Switch } from "react-router";
+import { useMediaPredicate } from "react-media-hook";
 import NotFound from "./components/not-found/NotFound";
+import { CircularProgress, Tooltip } from "@mui/material";
+import React, { Suspense, useEffect, useState } from "react";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import sidebarStyles from './components/sidebar/Sidebar.module.scss';
+import { Route, Redirect, Switch, useLocation } from "react-router";
 import * as mainUtil from './utils/main-util';
 
 const UsersLazyComponent = React.lazy(() => import('./components/users/Users'));
@@ -12,13 +17,40 @@ const EventsLazyComponent = React.lazy(() => import('./components/events/Events'
 const OverviewLazyComponent = React.lazy(() => import('./components/overview/Overview'));
 
 const App = () => {
+  const location = useLocation();
+  const { t } = useTranslation('index');
+  const [sidebarOpened, setSidebaredOpen] = useState(false);
+  const biggerThan1440 = useMediaPredicate("(min-width: 1440px)");
+
+  const onToggleSidebar = () => {
+    setSidebaredOpen(!sidebarOpened);
+  }
+
+  useEffect(() => {
+    setSidebaredOpen(false || !biggerThan1440);
+  }, [location.pathname, biggerThan1440]);
+
   return (
     <>
+      {sidebarOpened && <div id="container__sidebar--overlay" onClick={onToggleSidebar}></div>}
+
       <div className="container">
-        <div className="container__sidebar">
+        <div id="container__sidebar--small">
+          <span onClick={onToggleSidebar}>
+            {!sidebarOpened && <Tooltip title={t<string>('main.openMenu')}>
+              <MenuIcon />
+            </Tooltip>}
+
+            {sidebarOpened && <Tooltip title={t<string>('main.closeMenu')}>
+              <HighlightOffIcon />
+            </Tooltip>}
+          </span>
+        </div>
+
+        <div id="container__sidebar" className={sidebarOpened ? sidebarStyles.mobileSidebar : ''}>
           <Sidebar></Sidebar>
         </div>
-        <div className="container__content">
+        <div id="container__content">
           <Switch>
             <Route path="/" exact>
               <Redirect to="/overview"></Redirect>
