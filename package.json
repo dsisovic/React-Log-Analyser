@@ -1,7 +1,7 @@
 {
-  "name": "my-app",
+  "name": "React-Log-Analyser",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://dsisovic.github.io/React-Log-Analyser",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
@@ -19,6 +19,7 @@
     "@types/react-dom": "^17.0.9",
     "axios": "^0.21.4",
     "fontsource-nunito-sans": "^4.0.0",
+    "gh-pages": "^3.2.3",
     "i18next": "^21.2.0",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
@@ -33,6 +34,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
